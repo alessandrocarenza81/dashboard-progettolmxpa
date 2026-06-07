@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giorno 2 — Internet, Web &amp; Posta elettronica | Formazione EIPASS</title>
+<link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-badge">E7</div>
+      <div>
+        <div class="brand-title">Formazione EIPASS 7 Moduli 6.0</div>
+        <div class="brand-sub">Percorso interattivo · 5 giornate</div>
+      </div>
+    </a>
+    <div class="score-pill"><span class="star">★</span> <span id="total-score">0</span> punti totali</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div id="name-bar" class="name-bar"></div>
+
+  <div class="card">
+    <span class="badge">Giorno 2 di 5</span>
+    <h1>Internet, Web &amp; Posta elettronica 🌐</h1>
+    <p class="lead">
+      Oggi parliamo di navigazione, ricerca delle informazioni, posta elettronica e dei primi concetti di sicurezza online.
+      Iniziamo con un'attività un po' "investigativa": email vere o tentativi di phishing?
+    </p>
+  </div>
+
+  <div class="card">
+    <span class="badge green">Scheda di approfondimento</span>
+    <h2>Navigare e comunicare con criterio: in breve</h2>
+    <ul class="lead" style="padding-left:20px; margin:0">
+      <li>Prima di fidarti di un'informazione online, chiediti: <strong>chi l'ha scritta, quando, e lo dicono anche altre fonti autorevoli?</strong></li>
+      <li>Il <strong>lucchetto/HTTPS</strong> nella barra degli indirizzi indica una connessione cifrata: protegge i dati in transito, ma non garantisce che il sito sia onesto.</li>
+      <li>Segnali tipici del <strong>phishing</strong>: urgenza/minacce, richieste di credenziali via link, mittente "quasi giusto", errori di battitura insoliti.</li>
+      <li>Prima di cliccare un link, puoi spesso vedere l'indirizzo reale <strong>passandoci sopra con il mouse</strong> (senza cliccare): se non corrisponde al testo visibile, è un campanello d'allarme.</li>
+      <li>Nelle email di lavoro: <strong>oggetto chiaro</strong>, tono adeguato al destinatario, <strong>CC</strong> per chi deve solo essere informato e <strong>CCN</strong> quando i destinatari non devono vedersi tra loro.</li>
+      <li>Per i file molto pesanti, meglio condividere un <strong>link a uno spazio cloud</strong> piuttosto che allegarli direttamente: molte caselle di posta hanno un limite di dimensione.</li>
+    </ul>
+  </div>
+
+  <!-- ATTIVITÀ 1: QUIZ PHISHING -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge rose">Attività 1 · Quiz a tempo · Caso reale</span>
+        <h2 style="margin:0">Email sospetta o legittima?</h2>
+      </div>
+    </div>
+    <p class="lead">Osserva ogni messaggio in arrivo come faresti nella tua casella reale, e decidi: è un tentativo di truffa o una comunicazione normale?</p>
+    <div id="quiz-phishing"></div>
+  </div>
+
+  <!-- ATTIVITÀ 2: ABBINAMENTO TERMINI WEB -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge green">Attività 2 · Abbinamento</span>
+        <h2 style="margin:0">Il vocabolario del web</h2>
+      </div>
+    </div>
+    <p class="lead">Abbina ogni termine alla sua definizione corretta.</p>
+    <div id="match-web"></div>
+  </div>
+
+  <!-- ATTIVITÀ 3: QUIZ NETIQUETTE -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge amber">Attività 3 · Quiz a tempo</span>
+        <h2 style="margin:0">Email con criterio: come scriverle bene</h2>
+      </div>
+    </div>
+    <p class="lead">5 domande, 50 secondi a testa, su come comporre messaggi chiari ed efficaci.</p>
+    <div id="quiz-netiquette"></div>
+  </div>
+
+  <div class="footer-nav">
+    <a class="btn btn-secondary" href="giorno1.html">← Giorno 1</a>
+    <a class="btn btn-primary" href="giorno3.html">Giorno 3: Word →</a>
+  </div>
+
+</div>
+
+<script src="shared/score.js"></script>
+<script src="shared/cloud-score.js"></script>
+<script src="shared/matching-engine.js"></script>
+<script src="shared/quiz-engine.js"></script>
+<script>
+  document.getElementById('total-score').textContent = EipassScore.totals().score;
+  CloudScore.mountNameBar(document.getElementById('name-bar'));
+
+  QuizEngine.mount(document.getElementById('quiz-phishing'), {
+    storageKey: 'g2-quiz-phishing',
+    timePerQuestion: 50,
+    questions: [
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">📧 Posta in arrivo</div>
+          <div class="scenario-body">
+            <div class="mail-row"><span class="mail-from">Da: Banca Sicura Online &lt;support@banca-sicura-verifica24.com&gt;</span><span>Oggi, 09:14</span></div>
+            <strong>Oggetto: URGENTE — il tuo conto sarà sospeso entro 24 ore</strong>
+            <p>Gentile cliente, abbiamo rilevato un'attività sospetta sul tuo conto. <u>Clicca qui</u> e inserisci subito le tue credenziali per evitare la sospensione immediata.</p>
+          </div></div>`,
+        question: 'Questa email...?',
+        options: [
+          'Ha più segnali tipici del phishing: urgenza artificiale, minaccia, link sospetto e indirizzo mittente "quasi giusto"',
+          'È sicuramente un avviso ufficiale della banca, va seguito subito',
+          'Non si può giudicare senza prima aver cliccato sul link'
+        ],
+        correct: 0,
+        explanation: 'Urgenza, minacce, richiesta di credenziali via link e un indirizzo mittente sospetto sono i segnali classici del phishing. Non si clicca mai: si contatta la banca dai canali ufficiali conosciuti.'
+      },
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">📧 Posta in arrivo</div>
+          <div class="scenario-body">
+            <div class="mail-row"><span class="mail-from">Da: Maria Rossi &lt;m.rossi@comune.it&gt;</span><span>Ieri, 17:42</span></div>
+            <strong>Oggetto: Verbale riunione di martedì</strong>
+            <p>Ciao, in allegato trovi il verbale della riunione di martedì scorso. Fammi sapere se ci sono correzioni da fare. Grazie, Maria</p>
+            <p class="muted">📎 Verbale_riunione_11giugno.pdf</p>
+          </div></div>`,
+        question: 'E questa email, invece?',
+        options: [
+          'Ha caratteristiche di una normale comunicazione di lavoro: mittente riconoscibile, tono naturale, nessuna richiesta sospetta',
+          'È quasi certamente un tentativo di phishing perché ha un allegato',
+          'Va segnalata come spam a prescindere'
+        ],
+        correct: 0,
+        explanation: 'Mittente noto, tono normale, nessuna urgenza né richiesta di dati sensibili: sembra un messaggio di lavoro plausibile. Buona norma resta comunque verificare che il mittente sia atteso prima di aprire allegati.'
+      },
+      {
+        question: 'Quale di questi è un segnale d\'allarme quando un sito ti chiede dati di pagamento?',
+        options: [
+          'L\'indirizzo non mostra il lucchetto/HTTPS, eppure ti viene chiesta la carta di credito',
+          'Il sito ha un logo molto colorato',
+          'Il sito è scritto in italiano'
+        ],
+        correct: 0,
+        explanation: 'L\'assenza del lucchetto (connessione HTTPS) mentre si inseriscono dati sensibili è un campanello d\'allarme: i dati potrebbero viaggiare senza protezione.'
+      },
+      {
+        question: 'Per valutare se un\'informazione trovata online è attendibile, cosa conviene fare?',
+        options: [
+          'Confrontarla con altre fonti autorevoli e controllare chi l\'ha pubblicata e quando',
+          'Fidarsi sempre del primo risultato del motore di ricerca',
+          'Considerarla vera se ha tante condivisioni sui social'
+        ],
+        correct: 0,
+        explanation: 'Incrociare le fonti, controllare autore e data, e privilegiare siti istituzionali o testate riconosciute riduce il rischio di cadere in notizie false.'
+      },
+      {
+        question: 'Cosa indica, in particolare, l\'icona del lucchetto nella barra degli indirizzi del browser?',
+        options: [
+          'Che la connessione fra browser e sito è cifrata (HTTPS)',
+          'Che il sito è sicuramente affidabile e senza contenuti falsi',
+          'Che il sito non raccoglie alcun dato personale'
+        ],
+        correct: 0,
+        explanation: 'Il lucchetto segnala una connessione cifrata: protegge i dati durante il trasferimento, ma non garantisce da solo che i contenuti del sito siano veri o affidabili.'
+      },
+      {
+        question: 'Prima di cliccare su un link ricevuto via email, cosa puoi fare per controllare dove porta realmente, senza cliccarci sopra?',
+        options: [
+          'Passare il puntatore del mouse sopra il link (senza cliccare): di solito appare l\'indirizzo reale di destinazione',
+          'Inoltrare l\'email a tutti i colleghi per chiedere un parere',
+          'Stampare l\'email e leggerla con calma',
+          'Niente: non si può sapere dove porta un link finché non lo si apre'
+        ],
+        correct: 0,
+        explanation: 'Il "passaggio del mouse" (hover) sul link mostra spesso l\'URL reale in basso nel browser o nel client di posta: se è molto diverso dal testo visualizzato, è un segnale sospetto.'
+      },
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">📧 Posta in arrivo</div>
+          <div class="scenario-body">
+            <div class="mail-row"><span class="mail-from">Da: Assistenza Account &lt;no-reply@servizio-mail-assistenza.net&gt;</span><span>Oggi, 11:03</span></div>
+            <strong>Oggetto: Hai ricevuto un nuovo messaggio vocale</strong>
+            <p>Per ascoltare il messaggio vocale ricevuto, accedi al portale e <u>conferma la tua identità con le credenziali del tuo account email</u>.</p>
+          </div></div>`,
+        question: 'Ti sembra plausibile che un servizio richieda "le credenziali del tuo account email" per ascoltare un messaggio vocale?',
+        options: [
+          'No: nessun servizio legittimo chiede le credenziali della tua casella email per attività di questo tipo — è un classico schema di phishing per rubare le password',
+          'Sì, è una procedura normale di verifica della sicurezza',
+          'Sì, ma solo se il messaggio è scritto in un italiano corretto',
+          'Non si può dire nulla senza prima aver inserito le credenziali'
+        ],
+        correct: 0,
+        explanation: 'Richieste di credenziali "fuori contesto" (per ascoltare un audio, sbloccare un pacco, evitare una sospensione...) sono il cuore delle truffe di phishing: i servizi legittimi non chiedono mai la password via email o link esterni.'
+      },
+    ],
+  });
+
+  MatchingEngine.mount(document.getElementById('match-web'), {
+    storageKey: 'g2-match-web',
+    leftTitle: 'Termine',
+    rightTitle: 'Definizione',
+    pairs: [
+      { left: 'Browser', right: 'Programma per navigare e visualizzare le pagine web (es. Chrome, Firefox, Edge)' },
+      { left: 'URL', right: "L'indirizzo univoco di una pagina web, ad es. https://www.comune.it" },
+      { left: 'Motore di ricerca', right: 'Servizio che trova informazioni e siti a partire da parole chiave (es. Google)' },
+      { left: 'Cookie', right: 'Piccolo file che un sito salva nel browser per ricordare preferenze o accessi' },
+      { left: 'Allegato', right: "File collegato a un'email, che si può scaricare e aprire" },
+      { left: 'Cloud', right: 'Spazio di archiviazione online che permette di salvare e condividere file da più dispositivi' },
+      { left: 'Download', right: 'Trasferimento di un file da Internet al proprio dispositivo' },
+      { left: 'Password robusta', right: 'Combinazione lunga di lettere, numeri e simboli, diversa per ogni servizio e difficile da indovinare' },
+    ]
+  });
+
+  QuizEngine.mount(document.getElementById('quiz-netiquette'), {
+    storageKey: 'g2-quiz-netiquette',
+    timePerQuestion: 50,
+    questions: [
+      {
+        question: 'Perché conviene scrivere sempre un oggetto chiaro e specifico nelle email di lavoro?',
+        options: [
+          'Perché aiuta chi la riceve a capire subito di cosa si tratta, a darle la giusta priorità e a ritrovarla facilmente in seguito',
+          'Perché altrimenti l\'email non viene recapitata',
+          'Perché un oggetto lungo aumenta automaticamente l\'importanza del messaggio',
+          'Non ha alcuna importanza: conta solo il contenuto'
+        ],
+        correct: 0,
+        explanation: 'Un oggetto come "Verbale riunione 11/06 — da approvare entro venerdì" comunica subito argomento e urgenza, molto più di un generico "Informazioni" o, peggio, nessun oggetto.'
+      },
+      {
+        question: 'Quando è preferibile usare il campo "CCN" (copia conoscenza nascosta) invece di "CC"?',
+        options: [
+          'Quando si scrive a tante persone che non devono vedere gli indirizzi email reciproci (es. una comunicazione a un grande gruppo di destinatari esterni)',
+          'Sempre, per qualsiasi email, anche tra due colleghi',
+          'Solo quando si vuole nascondere il contenuto del messaggio',
+          'Il CCN serve a inviare l\'email più velocemente'
+        ],
+        correct: 0,
+        explanation: 'Il CCN nasconde gli indirizzi dei destinatari tra loro: utile per la privacy quando si scrive a molte persone che non si conoscono fra loro.'
+      },
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">📧 Nuovo messaggio</div>
+          <div class="scenario-body">
+            <strong>Allegato:</strong> Video_corso_completo.mp4 (1,4 GB)
+          </div></div>`,
+        question: 'Devi inviare questo file molto pesante a un collega via email. Qual è generalmente l\'approccio migliore?',
+        options: [
+          'Caricarlo su uno spazio cloud condiviso e inviare un link, perché molte caselle email rifiutano allegati così grandi',
+          'Allegarlo comunque: prima o poi l\'email arriverà',
+          'Dividerlo in 50 email più piccole con un pezzo ciascuna',
+          'Stamparne i fotogrammi principali e spedirli per posta'
+        ],
+        correct: 0,
+        explanation: 'La maggior parte dei provider di posta limita la dimensione degli allegati (spesso 20-25 MB): per i file pesanti conviene un link a uno spazio cloud (Drive, OneDrive...), più comodo anche per chi riceve.'
+      },
+      {
+        question: 'In un\'email di lavoro rivolta a una persona che non conosci, quale apertura è generalmente più indicata?',
+        options: [
+          'Un saluto adeguato al contesto (es. "Gentile dott.ssa Rossi" o "Buongiorno") seguito da una breve presentazione del motivo del messaggio',
+          'Andare dritti al punto senza alcun saluto, per risparmiare tempo',
+          'Usare sempre un tono molto informale, per sembrare più simpatici',
+          'Scrivere tutto in maiuscolo per farsi notare nella casella di posta'
+        ],
+        correct: 0,
+        explanation: 'Un saluto adeguato al contesto e una breve introduzione aiutano chi legge a inquadrare subito la richiesta: il tono va poi adattato al destinatario e alla relazione che si ha con lui.'
+      },
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">📧 Posta in arrivo — Discussione di gruppo</div>
+          <div class="scenario-body">
+            <div class="mail-row"><span class="mail-from">Da: Ufficio Comunicazione &lt;comunicazione@ente.it&gt;</span><span>Oggi, 10:20</span></div>
+            <strong>Oggetto: Nuovo orario sportello da lunedì</strong>
+            <p>A tutto il personale (40 destinatari in copia): da lunedì lo sportello aprirà alle 8:30. Grazie.</p>
+          </div></div>`,
+        question: 'Un collega risponde cliccando "Rispondi a tutti" scrivendo solo "Grazie per l\'informazione 🙂", inviandolo così a tutti i 40 destinatari. Cosa ne pensi?',
+        options: [
+          'Probabilmente non era necessario: per un semplice ringraziamento personale sarebbe stato meglio rispondere solo al mittente, evitando di affollare le caselle di tutti',
+          'Ha fatto benissimo: più persone leggono il messaggio, meglio è',
+          'È obbligatorio rispondere sempre a tutti in ogni discussione di gruppo',
+          'Non fa alcuna differenza tra "Rispondi" e "Rispondi a tutti"'
+        ],
+        correct: 0,
+        explanation: '"Rispondi a tutti" è utile quando il contenuto serve a tutto il gruppo; per messaggi personali (ringraziamenti, conferme individuali...) è meglio rispondere al solo mittente, per non affollare inutilmente le caselle altrui.'
+      },
+    ],
+  });
+</script>
+</body>
+</html>

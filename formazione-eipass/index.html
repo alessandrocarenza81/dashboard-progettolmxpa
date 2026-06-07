@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formazione EIPASS 7 Moduli 6.0 — Percorso interattivo</title>
+<link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-badge">E7</div>
+      <div>
+        <div class="brand-title">Formazione EIPASS 7 Moduli 6.0</div>
+        <div class="brand-sub">Percorso interattivo · 5 giornate · Alessandro Carenza</div>
+      </div>
+    </a>
+    <div class="score-pill"><span class="star">★</span> <span id="total-score">0</span> punti totali · <span id="total-done">0</span> attività completate</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div id="name-bar" class="name-bar"></div>
+
+  <div class="card">
+    <span class="badge">Percorso di 5 giornate</span>
+    <h1>Benvenuti/e! 👋</h1>
+    <p class="lead">
+      In questa pagina trovate le attività interattive che accompagneranno la spiegazione frontale e il PDF dei contenuti EIPASS,
+      giorno per giorno: quiz a tempo, esercizi di abbinamento, scenari realistici da analizzare insieme, e una scheda di
+      ripasso per ciascuna giornata. Ogni esercizio dà un punteggio che si somma a quello degli altri giorni — provate a
+      migliorarvi di giornata in giornata!
+    </p>
+    <p class="muted" style="margin-top:10px">
+      ℹ️ Il punteggio resta sempre salvato anche su questo dispositivo/browser, così il riepilogo qui sopra funziona pure
+      offline. Se inserite il vostro nome (vedi il riquadro in alto), i risultati delle attività vengono inoltre inviati
+      al docente, che può seguire i progressi della classe giornata per giornata — l'unico dato condiviso è nome e punteggio,
+      nient'altro.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Le 5 giornate</h2>
+    <div class="day-grid">
+
+      <a class="day-card d1" href="giorno1.html">
+        <div class="day-num">Giorno 1</div>
+        <div class="day-title">Concetti di base &amp; Sistema Operativo</div>
+        <div class="day-desc">Hardware, software, file e cartelle: mettiamo ordine sulla "scrivania" digitale.</div>
+        <div class="day-progress" data-day="g1">da iniziare</div>
+      </a>
+
+      <a class="day-card d2" href="giorno2.html">
+        <div class="day-num">Giorno 2</div>
+        <div class="day-title">Internet, Web &amp; Posta elettronica</div>
+        <div class="day-desc">Navigare, cercare informazioni attendibili, scrivere email e riconoscere il phishing.</div>
+        <div class="day-progress" data-day="g2">da iniziare</div>
+      </a>
+
+      <a class="day-card d3" href="giorno3.html">
+        <div class="day-num">Giorno 3</div>
+        <div class="day-title">Elaborazione testi (Word)</div>
+        <div class="day-desc">Formattazione, stili e scorciatoie: scriviamo documenti professionali più in fretta.</div>
+        <div class="day-progress" data-day="g3">da iniziare</div>
+      </a>
+
+      <a class="day-card d4" href="giorno4.html">
+        <div class="day-num">Giorno 4</div>
+        <div class="day-title">Fogli di calcolo (Excel)</div>
+        <div class="day-desc">Formule, riferimenti e grafici: troviamo insieme l'errore nascosto nel foglio di calcolo.</div>
+        <div class="day-progress" data-day="g4">da iniziare</div>
+      </a>
+
+      <a class="day-card d5" href="giorno5.html">
+        <div class="day-num">Giorno 5</div>
+        <div class="day-title">Presentazioni (PowerPoint) &amp; Sicurezza</div>
+        <div class="day-desc">Slide efficaci, privacy e sicurezza informatica: il gran finale con il quizzone a punti.</div>
+        <div class="day-progress" data-day="g5">da iniziare</div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Come si usa, in breve</h2>
+    <ul class="lead" style="padding-left: 20px; margin: 0">
+      <li>Apri la pagina della giornata e segui le attività nell'ordine proposto, alternandole alla spiegazione e al PDF.</li>
+      <li>Ogni quiz ha un timer: rispondi entro il tempo per guadagnare il punto — crea un po' di sana adrenalina!</li>
+      <li>Negli esercizi di abbinamento, tocca prima un elemento a sinistra e poi la corrispondenza a destra.</li>
+      <li>A fine esercizio compare il punteggio: si può sempre rifare per migliorarsi.</li>
+    </ul>
+    <div class="tip">
+      💡 <strong>Suggerimento per l'aula:</strong> proietta lo schermo e fai rispondere "a voce alta" a turno, oppure — se ognuno segue da un proprio dispositivo — confrontate i punteggi finali a fine blocco come una piccola classifica informale.
+    </div>
+  </div>
+
+  <p class="muted" style="text-align:center; margin-top: 28px;">
+    Materiale didattico interattivo — Formazione EIPASS 7 Moduli 6.0 · realizzato per le sessioni in programma
+  </p>
+
+</div>
+
+<script src="shared/score.js"></script>
+<script src="shared/cloud-score.js"></script>
+<script>
+  CloudScore.mountNameBar(document.getElementById('name-bar'));
+
+  function refreshHeader() {
+    const t = EipassScore.totals();
+    document.getElementById('total-score').textContent = t.score;
+    document.getElementById('total-done').textContent = t.done;
+
+    const dayActivities = {
+      g1: ['g1-match-hardware', 'g1-quiz-sistema', 'g1-match-filetypes'],
+      g2: ['g2-quiz-phishing', 'g2-match-web', 'g2-quiz-netiquette'],
+      g3: ['g3-match-shortcut', 'g3-quiz-word', 'g3-match-strumenti'],
+      g4: ['g4-quiz-excel', 'g4-match-formule', 'g4-match-strumenti'],
+      g5: ['g5-quiz-finale', 'g5-match-sicurezza', 'g5-match-abitudini'],
+    };
+    const all = EipassScore.getAll();
+    document.querySelectorAll('.day-progress').forEach(el => {
+      const keys = dayActivities[el.dataset.day] || [];
+      const done = keys.filter(k => all[k]).length;
+      if (done === 0) el.textContent = 'da iniziare';
+      else if (done === keys.length) el.textContent = '✓ completata';
+      else el.textContent = `${done}/${keys.length} attività fatte`;
+    });
+  }
+  refreshHeader();
+</script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giorno 5 — Presentazioni &amp; Sicurezza | Formazione EIPASS</title>
+<link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-badge">E7</div>
+      <div>
+        <div class="brand-title">Formazione EIPASS 7 Moduli 6.0</div>
+        <div class="brand-sub">Percorso interattivo · 5 giornate</div>
+      </div>
+    </a>
+    <div class="score-pill"><span class="star">★</span> <span id="total-score">0</span> punti totali</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div id="name-bar" class="name-bar"></div>
+
+  <div class="card">
+    <span class="badge rose">Giorno 5 di 5 · Gran finale 🏁</span>
+    <h1>Presentazioni (PowerPoint) &amp; Sicurezza informatica 🎤🔒</h1>
+    <p class="lead">
+      Ultima giornata: parliamo di come costruire slide davvero efficaci e di cosa serve sapere su sicurezza, privacy e GDPR
+      nel lavoro di ogni giorno. Si chiude con il <strong>quizzone finale</strong>: il punteggio che farete qui si somma
+      a quello accumulato nei quattro giorni precedenti — diamo il massimo!
+    </p>
+  </div>
+
+  <div class="card">
+    <span class="badge green">Scheda di approfondimento</span>
+    <h2>Slide efficaci e sicurezza: il decalogo del corso</h2>
+    <ul class="lead" style="padding-left:20px; margin:0">
+      <li>Le slide <strong>sostengono</strong> il discorso, non lo sostituiscono: poche parole chiave, numeri, immagini — i dettagli restano nel parlato.</li>
+      <li>Regola pratica "<strong>6×6</strong>": indicativamente non più di 6 righe per slide e 6 parole per riga (è una linea guida, non una legge).</li>
+      <li>Il <strong>contrasto</strong> tra testo e sfondo deve essere alto (es. testo scuro su sfondo chiaro) per essere leggibile anche da lontano.</li>
+      <li>Mantieni un <strong>tema grafico coerente</strong> in tutta la presentazione: trasmette professionalità e riduce le distrazioni.</li>
+      <li><strong>GDPR</strong> = regole europee su come si raccolgono, usano e conservano i dati personali, anche nei documenti di lavoro quotidiani.</li>
+      <li><strong>Malware, phishing, ransomware</strong>: conoscerli aiuta a riconoscerli. <strong>Backup regolari</strong>, <strong>aggiornamenti</strong> e <strong>password robuste e diverse</strong> restano le difese più efficaci ed economiche.</li>
+    </ul>
+  </div>
+
+  <!-- ATTIVITÀ 1: QUIZZONE FINALE -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge rose">Attività 1 · Quizzone finale a tempo</span>
+        <h2 style="margin:0">Slide efficaci, sicurezza e privacy: quanto ne sappiamo?</h2>
+      </div>
+    </div>
+    <p class="lead">10 domande, 45 secondi a testa. Si parte da alcuni esempi di diapositive da migliorare, poi si passa alla sicurezza informatica.</p>
+    <div id="quiz-finale"></div>
+  </div>
+
+  <!-- ATTIVITÀ 2: ABBINAMENTO SICUREZZA -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge green">Attività 2 · Abbinamento</span>
+        <h2 style="margin:0">Il vocabolario della sicurezza informatica</h2>
+      </div>
+    </div>
+    <p class="lead">Abbina ogni termine alla sua definizione corretta.</p>
+    <div id="match-sicurezza"></div>
+  </div>
+
+  <!-- ATTIVITÀ 3: ABBINAMENTO BUONE ABITUDINI -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge green">Attività 3 · Abbinamento</span>
+        <h2 style="margin:0">Buone abitudini digitali quotidiane</h2>
+      </div>
+    </div>
+    <p class="lead">Abbina ogni comportamento al motivo per cui è una buona pratica — l'ultimo sforzo del percorso!</p>
+    <div id="match-abitudini"></div>
+  </div>
+
+  <div class="card" style="text-align:center; margin-top:24px">
+    <span class="badge">Complimenti per il percorso! 🎉</span>
+    <h2>È stato un piacere lavorare insieme</h2>
+    <p class="lead">Il punteggio totale del percorso resta visibile in alto e nella pagina principale: confrontatevi e festeggiate i risultati raggiunti in queste 5 giornate.</p>
+    <a class="btn btn-primary" href="index.html" style="margin-top:8px">← Torna al percorso completo</a>
+  </div>
+
+  <div class="footer-nav">
+    <a class="btn btn-secondary" href="giorno4.html">← Giorno 4</a>
+    <span></span>
+  </div>
+
+</div>
+
+<script src="shared/score.js"></script>
+<script src="shared/cloud-score.js"></script>
+<script src="shared/matching-engine.js"></script>
+<script src="shared/quiz-engine.js"></script>
+<script>
+  document.getElementById('total-score').textContent = EipassScore.totals().score;
+  CloudScore.mountNameBar(document.getElementById('name-bar'));
+
+  QuizEngine.mount(document.getElementById('quiz-finale'), {
+    storageKey: 'g5-quiz-finale',
+    timePerQuestion: 45,
+    questions: [
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">🖥️ Diapositiva 4 di 12</div>
+          <div class="scenario-body" style="font-size:0.8rem; line-height:1.6">
+            <strong>Il bilancio del progetto</strong><br>
+            Quest'anno il progetto ha registrato una crescita significativa rispetto all'anno precedente, con un incremento del budget di circa il 15% e il coinvolgimento di oltre 40 persone di diversi reparti, che hanno contribuito a tutte le fasi: dalla progettazione iniziale al collaudo finale, fino alla presentazione dei risultati al pubblico esterno e agli stakeholder...
+          </div></div>`,
+        question: 'Cosa si potrebbe migliorare in questa diapositiva?',
+        options: [
+          'Ridurre il testo a pochi punti chiave (es. "+15% budget", "40 persone coinvolte"), lasciando i dettagli al parlato',
+          'Aumentare ulteriormente la quantità di testo, per essere più precisi possibile',
+          'Scrivere tutto in corsivo per renderlo più elegante',
+          'Aggiungere altri tre paragrafi con la cronologia completa del progetto'
+        ],
+        correct: 0,
+        explanation: 'Le slide efficaci sostengono il discorso, non lo sostituiscono: poche parole chiave, numeri e immagini comunicano più di un muro di testo che il pubblico finirebbe per non leggere.'
+      },
+      {
+        question: 'Qual è una regola pratica spesso citata per non sovraccaricare di testo una slide?',
+        options: [
+          'La regola del "6x6": indicativamente, non più di 6 righe per slide e non più di 6 parole per riga',
+          'Scrivere sempre almeno 200 parole a slide per essere esaurienti',
+          'Una sola parola per slide, sempre',
+          'Non esistono regole: dipende solo dai gusti personali'
+        ],
+        correct: 0,
+        explanation: 'Regole come il "6x6" sono linee guida (non leggi rigide) che aiutano a mantenere le slide leggibili anche da lontano, lasciando spazio al relatore.'
+      },
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">🖥️ Diapositiva 7 di 12</div>
+          <div class="scenario-body">
+            <div style="color:#d6dbe3; background:#ffffff; padding:16px; border-radius:8px; text-align:center; font-weight:700; border:1px dashed #e2e8f0">
+              I prossimi passi del progetto
+            </div>
+          </div></div>`,
+        question: 'Qual è il problema principale di questa diapositiva?',
+        options: [
+          'Il contrasto tra testo e sfondo è troppo basso: diventa difficile da leggere, specialmente da lontano o per chi ha difficoltà visive',
+          'Il testo è troppo breve per essere un titolo',
+          'Manca un\'immagine decorativa di sfondo',
+          'Il titolo dovrebbe essere scritto in corsivo'
+        ],
+        correct: 0,
+        explanation: 'Un buon contrasto fra testo e sfondo è essenziale per leggibilità e accessibilità: meglio testo scuro su sfondo chiaro (o viceversa), evitando accostamenti "deboli" come grigio chiaro su bianco.'
+      },
+      {
+        question: 'Perché è utile mantenere lo stesso tema grafico in tutta la presentazione?',
+        options: [
+          'Dà un\'impressione di ordine e professionalità, e aiuta il pubblico a seguire più facilmente i contenuti',
+          'Perché altrimenti il file diventa troppo pesante da inviare via email',
+          'Perché il programma non permette di cambiarlo',
+          'Non è importante: ogni slide può avere uno stile diverso'
+        ],
+        correct: 0,
+        explanation: 'La coerenza grafica trasmette professionalità e riduce le distrazioni: il pubblico si concentra sul contenuto, non su quanto cambia lo stile da una slide all\'altra.'
+      },
+      {
+        question: 'Cos\'è, in breve, il GDPR e perché riguarda anche il lavoro d\'ufficio quotidiano?',
+        options: [
+          'È il Regolamento europeo sulla protezione dei dati personali: riguarda come si raccolgono, usano e conservano i dati delle persone, anche nei documenti di lavoro di tutti i giorni',
+          'È un programma antivirus europeo obbligatorio per le aziende',
+          'È lo standard tecnico per comprimere i file',
+          'È un tipo di backup automatico nel cloud'
+        ],
+        correct: 0,
+        explanation: 'Il GDPR (Regolamento Generale sulla Protezione dei Dati) stabilisce le regole sul trattamento dei dati personali: vale anche per email, elenchi su fogli di calcolo, archivi di documenti, ecc.'
+      },
+      {
+        question: 'Cosa si intende, in generale, con il termine "malware"?',
+        options: [
+          'Un termine generico per indicare software dannoso: virus, trojan, ransomware, spyware e simili',
+          'Un componente hardware difettoso',
+          'Un formato di file per immagini ad alta qualità',
+          'Un tipo di connessione di rete poco sicura'
+        ],
+        correct: 0,
+        explanation: '"Malware" (da "malicious software") è un termine ombrello che racchiude virus, trojan, ransomware, spyware e altri programmi pensati per danneggiare o sfruttare un dispositivo.'
+      },
+      {
+        question: 'Perché è importante effettuare regolarmente un backup (copia di sicurezza) dei propri file?',
+        options: [
+          'Perché consente di recuperare i dati in caso di guasto, furto, errore umano o attacco informatico (es. ransomware)',
+          'Perché rende il computer più veloce nell\'uso quotidiano',
+          'Perché libera automaticamente spazio su disco',
+          'Perché impedisce ai virus di entrare nel sistema'
+        ],
+        correct: 0,
+        explanation: 'Un backup aggiornato (su un supporto separato o nel cloud) è la "rete di sicurezza" che evita di perdere tutto in caso di imprevisti, dai guasti hardware ai ransomware che cifrano i file.'
+      },
+      {
+        question: 'Quale tra queste è una buona pratica di sicurezza informatica nella vita lavorativa quotidiana?',
+        options: [
+          'Mantenere aggiornati sistema operativo e programmi, e usare password diverse e robuste per servizi diversi',
+          'Usare la stessa password ovunque, così è più facile da ricordare',
+          'Disattivare l\'antivirus quando rallenta il computer',
+          'Annotare le password su un foglietto vicino allo schermo, per non dimenticarle'
+        ],
+        correct: 0,
+        explanation: 'Gli aggiornamenti chiudono le falle di sicurezza note; password diverse e robuste per ogni servizio limitano i danni nel caso una di esse venga compromessa.'
+      },
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">🖥️ Diapositiva 9 di 12</div>
+          <div class="scenario-body" style="text-align:center">
+            <div style="font-weight:700; margin-bottom:6px">Risultati del trimestre</div>
+            <div class="muted">[ogni parola del titolo entra volando da una direzione diversa, con suoni a ogni clic, e il grafico ruota due volte prima di fermarsi]</div>
+          </div></div>`,
+        question: 'L\'autore ha aggiunto molte animazioni ed effetti sonori a questa slide. Che effetto rischia di avere sul pubblico?',
+        options: [
+          'Rischia di distrarre dal contenuto e di rallentare la presentazione: animazioni ed effetti vanno usati con parsimonia, solo quando aiutano davvero a comunicare',
+          'Renderà sicuramente la presentazione più memorabile e professionale',
+          'Non avrà alcun effetto sul pubblico',
+          'Aiuterà il pubblico a leggere più velocemente i contenuti'
+        ],
+        correct: 0,
+        explanation: 'Animazioni e suoni eccessivi spostano l\'attenzione dal messaggio all\'effetto speciale: usati con misura possono guidare lo sguardo, ma in eccesso stancano e rallentano.'
+      },
+      {
+        question: 'Stai per condividere pubblicamente alcune slide che contengono per errore nomi e indirizzi email di alcuni colleghi. Cosa è opportuno fare prima di pubblicarle?',
+        options: [
+          'Rimuovere o oscurare quei dati personali, perché diffonderli senza necessità e senza consenso non rispetta i principi del GDPR sulla protezione dei dati',
+          'Pubblicarle comunque: una volta create, le slide non si possono più modificare',
+          'Cambiare solo il titolo della presentazione',
+          'Aggiungere altri dati personali, tanto il danno è già fatto'
+        ],
+        correct: 0,
+        explanation: 'Il GDPR richiede di trattare i dati personali con cura: prima di una condivisione ampia conviene sempre chiedersi se quei dati siano necessari e, in caso contrario, rimuoverli o anonimizzarli.'
+      },
+    ],
+  });
+
+  MatchingEngine.mount(document.getElementById('match-sicurezza'), {
+    storageKey: 'g5-match-sicurezza',
+    leftTitle: 'Termine',
+    rightTitle: 'Definizione',
+    pairs: [
+      { left: 'Malware', right: 'Termine generico per software dannoso: virus, trojan, ransomware, spyware...' },
+      { left: 'Phishing', right: 'Tentativo di ingannare una persona per farsi consegnare dati personali o credenziali' },
+      { left: 'Ransomware', right: "Software che blocca l'accesso ai file e chiede un riscatto per sbloccarli" },
+      { left: 'Backup', right: 'Copia di sicurezza dei dati, utile per recuperarli in caso di guasti o attacchi' },
+      { left: 'Antivirus', right: 'Programma che individua e blocca software dannosi' },
+      { left: 'Autenticazione a due fattori', right: 'Doppio livello di verifica dell\'identità, ad es. password + codice via SMS o app' },
+      { left: 'GDPR', right: 'Regolamento europeo che disciplina la raccolta e l\'uso dei dati personali' },
+      { left: 'Firewall', right: 'Sistema che filtra il traffico di rete per bloccare accessi non autorizzati' },
+    ]
+  });
+
+  MatchingEngine.mount(document.getElementById('match-abitudini'), {
+    storageKey: 'g5-match-abitudini',
+    leftTitle: 'Comportamento',
+    rightTitle: 'Perché è una buona pratica',
+    pairs: [
+      { left: 'Aggiornare regolarmente programmi e sistema operativo', right: 'Chiude le falle di sicurezza note prima che possano essere sfruttate' },
+      { left: 'Bloccare lo schermo quando ci si allontana', right: 'Evita che altri possano usare il tuo account anche solo per pochi minuti' },
+      { left: 'Diffidare di allegati e link inattesi', right: 'Riduce il rischio di aprire malware o cadere in tentativi di phishing' },
+      { left: 'Fare backup regolari dei file importanti', right: 'Permette di recuperare i dati in caso di guasti, errori o attacchi ransomware' },
+      { left: 'Usare password diverse per ogni servizio', right: 'Limita i danni: se una viene scoperta, gli altri account restano protetti' },
+      { left: 'Evitare dati sensibili su Wi-Fi pubbliche non protette', right: 'Riduce il rischio che le informazioni viaggino senza adeguata protezione' },
+      { left: 'Condividere solo i dati personali necessari', right: 'Rispetta i principi del GDPR sulla protezione dei dati altrui' },
+      { left: 'Tenere ordinati file e cartelle', right: 'Fa risparmiare tempo e riduce gli errori dovuti a documenti sbagliati o duplicati' },
+    ]
+  });
+</script>
+</body>
+</html>

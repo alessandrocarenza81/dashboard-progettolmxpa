@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giorno 1 — Concetti di base &amp; Sistema Operativo | Formazione EIPASS</title>
+<link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-badge">E7</div>
+      <div>
+        <div class="brand-title">Formazione EIPASS 7 Moduli 6.0</div>
+        <div class="brand-sub">Percorso interattivo · 5 giornate</div>
+      </div>
+    </a>
+    <div class="score-pill"><span class="star">★</span> <span id="total-score">0</span> punti totali</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div id="name-bar" class="name-bar"></div>
+
+  <div class="card">
+    <span class="badge">Giorno 1 di 5</span>
+    <h1>Concetti di base &amp; Sistema Operativo 🖥️</h1>
+    <p class="lead">
+      Oggi parliamo del "dietro le quinte" del computer: hardware e software, come funziona il sistema operativo,
+      come sono organizzati file e cartelle. Dopo la spiegazione e il PDF, mettiamoci alla prova con tre attività.
+    </p>
+  </div>
+
+  <div class="card">
+    <span class="badge green">Scheda di approfondimento</span>
+    <h2>Hardware, software e file: i concetti chiave in breve</h2>
+    <ul class="lead" style="padding-left:20px; margin:0">
+      <li><strong>Hardware</strong> = le parti fisiche del computer (CPU, RAM, disco, monitor, periferiche...). <strong>Software</strong> = i programmi che lo fanno funzionare.</li>
+      <li>Il <strong>software di sistema</strong> (es. il sistema operativo) gestisce l'hardware e fa "da regista"; il <strong>software applicativo</strong> (es. un elaboratore di testi) serve a svolgere compiti specifici.</li>
+      <li><strong>RAM</strong> = memoria temporanea di lavoro (si svuota allo spegnimento); <strong>disco/SSD</strong> = memoria permanente (conserva i dati anche da spento).</li>
+      <li>Le <strong>cartelle</strong> si possono annidare l'una dentro l'altra creando una struttura "ad albero": pensare prima a un criterio (per anno, per progetto, per cliente...) aiuta a non perdersi.</li>
+      <li>L'<strong>estensione</strong> di un file (es. <span class="kbd">.pdf</span>, <span class="kbd">.docx</span>, <span class="kbd">.jpg</span>) indica il tipo di contenuto e, di solito, con quale programma si apre.</li>
+      <li>Il <strong>Cestino</strong> conserva temporaneamente i file cancellati: si può quasi sempre ripristinare ciò che si elimina per sbaglio, finché non si svuota.</li>
+    </ul>
+  </div>
+
+  <!-- ATTIVITÀ 1: ABBINAMENTO HARDWARE -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge green">Attività 1 · Abbinamento</span>
+        <h2 style="margin:0">Componenti del computer: a cosa servono?</h2>
+      </div>
+    </div>
+    <p class="lead">Tocca prima un componente a sinistra, poi la sua funzione a destra. Trova tutte le 8 coppie corrette!</p>
+    <div id="match-hardware"></div>
+  </div>
+
+  <!-- ATTIVITÀ 2: QUIZ SISTEMA OPERATIVO -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge amber">Attività 2 · Quiz a tempo</span>
+        <h2 style="margin:0">Sistema operativo, file e cartelle</h2>
+      </div>
+    </div>
+    <p class="lead">8 domande, 45 secondi a testa. Alcune presentano uno scenario realistico da osservare prima di rispondere.</p>
+    <div id="quiz-sistema"></div>
+  </div>
+
+  <!-- ATTIVITÀ 3: ABBINAMENTO TIPI DI FILE -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge green">Attività 3 · Abbinamento</span>
+        <h2 style="margin:0">Tipi di file: li riconosci dall'estensione?</h2>
+      </div>
+    </div>
+    <p class="lead">Abbina ogni estensione di file al tipo di contenuto che normalmente rappresenta.</p>
+    <div id="match-filetypes"></div>
+  </div>
+
+  <div class="footer-nav">
+    <a class="btn btn-secondary" href="index.html">← Torna al percorso</a>
+    <a class="btn btn-primary" href="giorno2.html">Giorno 2: Internet &amp; Email →</a>
+  </div>
+
+</div>
+
+<script src="shared/score.js"></script>
+<script src="shared/cloud-score.js"></script>
+<script src="shared/matching-engine.js"></script>
+<script src="shared/quiz-engine.js"></script>
+<script>
+  document.getElementById('total-score').textContent = EipassScore.totals().score;
+  CloudScore.mountNameBar(document.getElementById('name-bar'));
+
+  MatchingEngine.mount(document.getElementById('match-hardware'), {
+    storageKey: 'g1-match-hardware',
+    leftTitle: 'Componente / periferica',
+    rightTitle: 'A cosa serve',
+    pairs: [
+      { left: 'CPU (processore)', right: "L'unità che esegue i calcoli e coordina tutte le operazioni del computer" },
+      { left: 'RAM (memoria)', right: 'Memoria temporanea: conserva i dati in uso e si svuota allo spegnimento' },
+      { left: 'Hard disk / SSD', right: 'Memoria permanente: conserva file e programmi anche a computer spento' },
+      { left: 'Scheda video (GPU)', right: 'Elabora le immagini e ciò che viene mostrato sullo schermo' },
+      { left: 'Mouse', right: 'Periferica di input per puntare, cliccare e selezionare sullo schermo' },
+      { left: 'Tastiera', right: 'Periferica di input per scrivere testo e inviare comandi' },
+      { left: 'Monitor', right: 'Periferica di output che mostra immagini, testi e video' },
+      { left: 'Stampante', right: 'Periferica di output che trasferisce i documenti digitali su carta' },
+    ]
+  });
+
+  QuizEngine.mount(document.getElementById('quiz-sistema'), {
+    storageKey: 'g1-quiz-sistema',
+    timePerQuestion: 45,
+    questions: [
+      {
+        question: 'Qual è la funzione principale del sistema operativo (es. Windows, macOS, Linux)?',
+        options: [
+          "Gestire l'hardware e permettere ai programmi di funzionare",
+          'Connettersi automaticamente a Internet',
+          'Creare in automatico copie di backup dei file',
+          'Tradurre i testi in altre lingue'
+        ],
+        correct: 0,
+        explanation: "Il sistema operativo fa da intermediario tra hardware e programmi: gestisce memoria, file, periferiche e l'interfaccia con cui interagiamo."
+      },
+      {
+        scenario: `<div class="scenario">
+            <div class="scenario-bar"><span class="dot" style="background:#ef4444"></span><span class="dot" style="background:#f59e0b"></span><span class="dot" style="background:#10b981"></span> Esplora file — Documenti</div>
+            <div class="scenario-body"><table>
+              <tr><th>Nome file</th><th>Tipo</th><th>Dimensione</th></tr>
+              <tr><td>📄 Contratto_2024.pdf</td><td>Documento PDF</td><td>320 KB</td></tr>
+              <tr><td>🖼️ Foto_evento.jpg</td><td>Immagine JPEG</td><td>2,1 MB</td></tr>
+              <tr><td>📊 Presentazione_corso.pptx</td><td>Presentazione PowerPoint</td><td>5,4 MB</td></tr>
+              <tr><td>📝 Note.txt</td><td>Documento di testo</td><td>2 KB</td></tr>
+            </table></div></div>`,
+        question: 'Osservando questo elenco, quale file è quasi certamente una fotografia?',
+        options: ['Contratto_2024.pdf', 'Foto_evento.jpg', 'Note.txt', 'Presentazione_corso.pptx'],
+        correct: 1,
+        explanation: "L'estensione .jpg identifica un'immagine; .pdf un documento, .txt un testo semplice, .pptx una presentazione."
+      },
+      {
+        question: 'Per selezionare più file non adiacenti in un elenco, quale tasto si tiene premuto mentre si fa clic su ciascuno?',
+        options: ['Ctrl (o Cmd su Mac)', 'Bloc Maiusc', 'Tab', 'Stampa schermo'],
+        correct: 0,
+        explanation: 'Ctrl/Cmd + clic seleziona elementi singoli non consecutivi; Maiusc + clic seleziona invece un intervallo continuo.'
+      },
+      {
+        scenario: `<div class="scenario">
+            <div class="scenario-bar"><span class="dot" style="background:#ef4444"></span><span class="dot" style="background:#f59e0b"></span><span class="dot" style="background:#10b981"></span> Scrivania</div>
+            <div class="scenario-body">
+              🗑️ <strong>Cestino</strong> (3 elementi): <em>Bozza_vecchia.docx</em>, <em>Foto_sfocata.png</em>, <em>Appunti.txt</em><br><br>
+              Hai cancellato per sbaglio "Appunti.txt" pochi minuti fa e ti accorgi ora che ti serviva ancora.
+            </div></div>`,
+        question: 'Cosa puoi fare a questo punto?',
+        options: [
+          'Aprire il Cestino e ripristinare il file, perché non è stato ancora eliminato definitivamente',
+          'Niente: una volta cancellato, un file sparisce per sempre dal computer',
+          'Scrivere di nuovo il file da zero, è l\'unica soluzione',
+          'Riavviare il computer per farlo riapparire'
+        ],
+        correct: 0,
+        explanation: 'Il Cestino conserva temporaneamente i file eliminati: puoi ripristinarli con un clic destro, oppure svuotarlo quando sei sicuro di non servirtene più.'
+      },
+      {
+        question: 'Quale di questi è un buon criterio per nominare i file e ritrovarli facilmente nel tempo?',
+        options: [
+          'Nomi descrittivi e coerenti, ad es. "2024-06_Relazione_corso_EIPASS"',
+          'Chiamare tutti i file semplicemente "documento"',
+          'Usare solo numeri casuali generati dal computer',
+          'Lasciare sempre il nome predefinito proposto dal programma'
+        ],
+        correct: 0,
+        explanation: 'Nomi descrittivi e una convenzione coerente (es. data_argomento) permettono di ritrovare un file a colpo d\'occhio anche dopo mesi, senza doverlo aprire.'
+      },
+      {
+        question: 'Vero o falso: una cartella può contenere al suo interno altre cartelle (sottocartelle).',
+        options: ['Vero', 'Falso'],
+        correct: 0,
+        explanation: 'Esatto: questo crea una struttura "ad albero" che aiuta a organizzare i contenuti, ad esempio Documenti › Corsi › 2024 › EIPASS.'
+      },
+      {
+        question: 'Quale di queste frasi descrive correttamente la differenza tra "software di sistema" e "software applicativo"?',
+        options: [
+          'Il software di sistema (es. il sistema operativo) gestisce l\'hardware e fa funzionare il computer; quello applicativo (es. un elaboratore di testi) serve a svolgere compiti specifici',
+          'Il software di sistema serve solo per giocare, quello applicativo solo per lavorare',
+          'Sono due nomi diversi per indicare esattamente la stessa cosa',
+          'Il software applicativo è una parte dell\'hardware del computer'
+        ],
+        correct: 0,
+        explanation: 'Il sistema operativo è il "regista" che fa funzionare hardware e programmi; i software applicativi (Word, Excel, browser...) sono gli strumenti che usiamo per svolgere compiti specifici.'
+      },
+      {
+        scenario: `<div class="scenario">
+            <div class="scenario-bar"><span class="dot" style="background:#ef4444"></span><span class="dot" style="background:#f59e0b"></span><span class="dot" style="background:#10b981"></span> Scarica allegati — Posta</div>
+            <div class="scenario-body">
+              Hai ricevuto tre file: <em>Relazione.pdf</em>, <em>Foto_gruppo.jpeg</em>, <em>Archivio_progetto.zip</em>.
+            </div></div>`,
+        question: 'Osservando solo il nome e l\'estensione di questi file, cosa puoi dedurre con buona probabilità?',
+        options: [
+          'Che tipo di contenuto trovi in ciascuno (un documento, un\'immagine, un archivio compresso) e con quale tipo di programma aprirli',
+          'Quanto tempo impiegherai a leggerli, indipendentemente dal contenuto',
+          'Che provengono tutti dalla stessa persona',
+          'Che sono tutti privi di virus'
+        ],
+        correct: 0,
+        explanation: 'L\'estensione (.pdf, .jpeg, .zip) è una convenzione che indica il tipo di file e, di conseguenza, il tipo di programma più adatto ad aprirlo: utile per orientarsi prima ancora di aprirlo.'
+      },
+    ],
+  });
+
+  MatchingEngine.mount(document.getElementById('match-filetypes'), {
+    storageKey: 'g1-match-filetypes',
+    leftTitle: 'Estensione',
+    rightTitle: 'Tipo di contenuto',
+    pairs: [
+      { left: '.docx', right: 'Documento di testo creato con un elaboratore di testi (es. Word)' },
+      { left: '.xlsx', right: 'Foglio di calcolo con dati, formule e grafici (es. Excel)' },
+      { left: '.pptx', right: 'Presentazione a diapositive (es. PowerPoint)' },
+      { left: '.pdf', right: "Documento che mantiene l'aspetto invariato su qualsiasi dispositivo o stampante" },
+      { left: '.jpg / .png', right: 'Formati comuni per le immagini' },
+      { left: '.mp4', right: 'Formato comune per i file video' },
+      { left: '.mp3', right: 'Formato comune per i file audio' },
+      { left: '.zip', right: 'Archivio che raccoglie più file compressi in un unico file' },
+    ]
+  });
+</script>
+</body>
+</html>

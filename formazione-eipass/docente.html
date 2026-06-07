@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pannello docente — Punteggi in tempo reale | Formazione EIPASS</title>
+<link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-badge">E7</div>
+      <div>
+        <div class="brand-title">Formazione EIPASS 7 Moduli 6.0</div>
+        <div class="brand-sub">Pannello docente · punteggi in tempo reale</div>
+      </div>
+    </a>
+    <span class="badge rose">Solo per il docente</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="card">
+    <span class="badge">Pannello docente</span>
+    <h1>Punteggi degli allievi 📊</h1>
+    <p class="lead">
+      Qui vedi, in tempo reale, i risultati che gli allievi inviano dalle pagine delle attività (solo se hanno inserito
+      il proprio nome). I dati arrivano da un piccolo database condiviso: aggiorna la pagina o aspetta l'aggiornamento
+      automatico per vedere gli ultimi invii.
+    </p>
+    <p class="muted" style="margin-top:8px">
+      🔒 Questa pagina non è collegata dal percorso degli allievi: condividi il suo indirizzo solo con chi deve vederla.
+      I dati raccolti sono solo nome scelto dall'allievo, attività svolta e punteggio — nessun altro dato personale.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="teacher-toolbar">
+      <div class="teacher-tabs" id="day-tabs"></div>
+      <div class="teacher-status" id="status">Caricamento...</div>
+    </div>
+    <div id="content"><div class="teacher-empty">Caricamento dei punteggi in corso...</div></div>
+    <div style="text-align:center; margin-top:14px">
+      <button class="btn btn-secondary" id="refresh-btn">↻ Aggiorna ora</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="shared/cloud-score.js"></script>
+<script>
+  const DAY_LABELS = ['Tutti i giorni', 'Giorno 1', 'Giorno 2', 'Giorno 3', 'Giorno 4', 'Giorno 5'];
+  const DAY_TOTALS = { 'Giorno 1': 3, 'Giorno 2': 3, 'Giorno 3': 3, 'Giorno 4': 3, 'Giorno 5': 3 };
+  const AUTO_REFRESH_MS = 20000;
+
+  let activeTab = 'Tutti i giorni';
+  let rows = [];
+  let timer = null;
+
+  const tabsEl = document.getElementById('day-tabs');
+  const statusEl = document.getElementById('status');
+  const contentEl = document.getElementById('content');
+
+  DAY_LABELS.forEach(label => {
+    const b = document.createElement('button');
+    b.className = 'teacher-tab' + (label === activeTab ? ' active' : '');
+    b.textContent = label;
+    b.onclick = () => { activeTab = label; renderTabs(); render(); };
+    tabsEl.appendChild(b);
+  });
+
+  function renderTabs() {
+    [...tabsEl.children].forEach(b => b.classList.toggle('active', b.textContent === activeTab));
+  }
+
+  async function load(showSpinner) {
+    if (showSpinner) statusEl.textContent = 'Aggiornamento in corso...';
+    try {
+      rows = await CloudScore.fetchAll();
+      const now = new Date();
+      statusEl.textContent = 'Aggiornato alle ' + now.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+        + ' · ' + rows.length + ' invii ricevuti';
+      render();
+    } catch (e) {
+      statusEl.textContent = '⚠️ Impossibile aggiornare (' + e.message + '). Riprovo tra poco...';
+    }
+  }
+
+  // Per ciascuno studente conserva il MIGLIOR risultato per ogni attività
+  // (coerente con la logica usata sul dispositivo dell'allievo in score.js).
+  function buildSummary(filterDay) {
+    const byStudent = {};
+    rows.forEach(r => {
+      if (filterDay && r.day_key !== filterDay) return;
+      const key = r.student_name;
+      if (!byStudent[key]) byStudent[key] = { name: r.student_name, activities: {}, lastUpdate: r.created_at, days: new Set() };
+      const s = byStudent[key];
+      s.days.add(r.day_key);
+      if (r.created_at > s.lastUpdate) s.lastUpdate = r.created_at;
+      const prev = s.activities[r.activity_key];
+      if (!prev || r.score > prev.score) s.activities[r.activity_key] = { score: r.score, total: r.total, day: r.day_key };
+    });
+    return Object.values(byStudent).map(s => {
+      let score = 0, total = 0, done = 0;
+      Object.values(s.activities).forEach(a => { score += a.score; total += a.total; done++; });
+      return { ...s, score, total, done };
+    });
+  }
+
+  function render() {
+    const filterDay = activeTab === 'Tutti i giorni' ? null : activeTab;
+    const summary = buildSummary(filterDay);
+
+    if (summary.length === 0) {
+      contentEl.innerHTML = '<div class="teacher-empty">Nessun punteggio ricevuto ancora' +
+        (filterDay ? ' per ' + filterDay : '') +
+        '.<br><span class="muted">Appena un allievo inserisce il proprio nome e completa un\'attività, comparirà qui.</span></div>';
+      return;
+    }
+
+    summary.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
+
+    const expectedTotal = filterDay ? DAY_TOTALS[filterDay] : Object.values(DAY_TOTALS).reduce((a, b) => a + b, 0);
+
+    let html = '<table class="teacher-table"><thead><tr>' +
+      '<th>Allievo</th>' +
+      '<th>Attività completate</th>' +
+      '<th>Punteggio</th>' +
+      '<th>Avanzamento</th>' +
+      '<th>Ultimo invio</th>' +
+      '</tr></thead><tbody>';
+
+    summary.forEach(s => {
+      const pct = expectedTotal ? Math.min(100, Math.round((s.done / expectedTotal) * 100)) : 0;
+      const last = new Date(s.lastUpdate);
+      html += '<tr>' +
+        '<td><strong>' + escapeHtml(s.name) + '</strong>' + (filterDay ? '' : '<br><span class="muted">' + [...s.days].sort().join(' · ') + '</span>') + '</td>' +
+        '<td>' + s.done + ' / ' + expectedTotal + '</td>' +
+        '<td>' + s.score + ' / ' + s.total + '</td>' +
+        '<td><div class="teacher-bar-track"><div class="teacher-bar-fill" style="width:' + pct + '%"></div></div></td>' +
+        '<td class="muted">' + last.toLocaleDateString('it-IT') + ' ' + last.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' }) + '</td>' +
+        '</tr>';
+    });
+
+    html += '</tbody></table>';
+    contentEl.innerHTML = html;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  document.getElementById('refresh-btn').onclick = () => load(true);
+
+  load(true);
+  timer = setInterval(() => load(false), AUTO_REFRESH_MS);
+</script>
+</body>
+</html>
