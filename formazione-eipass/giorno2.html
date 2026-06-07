@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giorno 2 — Internet, Web &amp; Posta elettronica | Formazione EIPASS</title>
+<link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-badge">E7</div>
+      <div>
+        <div class="brand-title">Formazione EIPASS 7 Moduli 6.0</div>
+        <div class="brand-sub">Percorso interattivo · 5 giornate</div>
+      </div>
+    </a>
+    <div class="score-pill"><span class="star">★</span> <span id="total-score">0</span> punti totali</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="card">
+    <span class="badge">Giorno 2 di 5</span>
+    <h1>Internet, Web &amp; Posta elettronica 🌐</h1>
+    <p class="lead">
+      Oggi parliamo di navigazione, ricerca delle informazioni, posta elettronica e dei primi concetti di sicurezza online.
+      Iniziamo con un'attività un po' "investigativa": email vere o tentativi di phishing?
+    </p>
+  </div>
+
+  <!-- ATTIVITÀ 1: QUIZ PHISHING -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge rose">Attività 1 · Quiz a tempo · Caso reale</span>
+        <h2 style="margin:0">Email sospetta o legittima?</h2>
+      </div>
+    </div>
+    <p class="lead">Osserva ogni messaggio in arrivo come faresti nella tua casella reale, e decidi: è un tentativo di truffa o una comunicazione normale?</p>
+    <div id="quiz-phishing"></div>
+  </div>
+
+  <!-- ATTIVITÀ 2: ABBINAMENTO TERMINI WEB -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge green">Attività 2 · Abbinamento</span>
+        <h2 style="margin:0">Il vocabolario del web</h2>
+      </div>
+    </div>
+    <p class="lead">Abbina ogni termine alla sua definizione corretta.</p>
+    <div id="match-web"></div>
+  </div>
+
+  <div class="footer-nav">
+    <a class="btn btn-secondary" href="giorno1.html">← Giorno 1</a>
+    <a class="btn btn-primary" href="giorno3.html">Giorno 3: Word →</a>
+  </div>
+
+</div>
+
+<script src="shared/score.js"></script>
+<script src="shared/matching-engine.js"></script>
+<script src="shared/quiz-engine.js"></script>
+<script>
+  document.getElementById('total-score').textContent = EipassScore.totals().score;
+
+  QuizEngine.mount(document.getElementById('quiz-phishing'), {
+    storageKey: 'g2-quiz-phishing',
+    timePerQuestion: 30,
+    questions: [
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">📧 Posta in arrivo</div>
+          <div class="scenario-body">
+            <div class="mail-row"><span class="mail-from">Da: Banca Sicura Online &lt;support@banca-sicura-verifica24.com&gt;</span><span>Oggi, 09:14</span></div>
+            <strong>Oggetto: URGENTE — il tuo conto sarà sospeso entro 24 ore</strong>
+            <p>Gentile cliente, abbiamo rilevato un'attività sospetta sul tuo conto. <u>Clicca qui</u> e inserisci subito le tue credenziali per evitare la sospensione immediata.</p>
+          </div></div>`,
+        question: 'Questa email...?',
+        options: [
+          'Ha più segnali tipici del phishing: urgenza artificiale, minaccia, link sospetto e indirizzo mittente "quasi giusto"',
+          'È sicuramente un avviso ufficiale della banca, va seguito subito',
+          'Non si può giudicare senza prima aver cliccato sul link'
+        ],
+        correct: 0,
+        explanation: 'Urgenza, minacce, richiesta di credenziali via link e un indirizzo mittente sospetto sono i segnali classici del phishing. Non si clicca mai: si contatta la banca dai canali ufficiali conosciuti.'
+      },
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">📧 Posta in arrivo</div>
+          <div class="scenario-body">
+            <div class="mail-row"><span class="mail-from">Da: Maria Rossi &lt;m.rossi@comune.it&gt;</span><span>Ieri, 17:42</span></div>
+            <strong>Oggetto: Verbale riunione di martedì</strong>
+            <p>Ciao, in allegato trovi il verbale della riunione di martedì scorso. Fammi sapere se ci sono correzioni da fare. Grazie, Maria</p>
+            <p class="muted">📎 Verbale_riunione_11giugno.pdf</p>
+          </div></div>`,
+        question: 'E questa email, invece?',
+        options: [
+          'Ha caratteristiche di una normale comunicazione di lavoro: mittente riconoscibile, tono naturale, nessuna richiesta sospetta',
+          'È quasi certamente un tentativo di phishing perché ha un allegato',
+          'Va segnalata come spam a prescindere'
+        ],
+        correct: 0,
+        explanation: 'Mittente noto, tono normale, nessuna urgenza né richiesta di dati sensibili: sembra un messaggio di lavoro plausibile. Buona norma resta comunque verificare che il mittente sia atteso prima di aprire allegati.'
+      },
+      {
+        question: 'Quale di questi è un segnale d\'allarme quando un sito ti chiede dati di pagamento?',
+        options: [
+          'L\'indirizzo non mostra il lucchetto/HTTPS, eppure ti viene chiesta la carta di credito',
+          'Il sito ha un logo molto colorato',
+          'Il sito è scritto in italiano'
+        ],
+        correct: 0,
+        explanation: 'L\'assenza del lucchetto (connessione HTTPS) mentre si inseriscono dati sensibili è un campanello d\'allarme: i dati potrebbero viaggiare senza protezione.'
+      },
+      {
+        question: 'Per valutare se un\'informazione trovata online è attendibile, cosa conviene fare?',
+        options: [
+          'Confrontarla con altre fonti autorevoli e controllare chi l\'ha pubblicata e quando',
+          'Fidarsi sempre del primo risultato del motore di ricerca',
+          'Considerarla vera se ha tante condivisioni sui social'
+        ],
+        correct: 0,
+        explanation: 'Incrociare le fonti, controllare autore e data, e privilegiare siti istituzionali o testate riconosciute riduce il rischio di cadere in notizie false.'
+      },
+      {
+        question: 'Cosa indica, in particolare, l\'icona del lucchetto nella barra degli indirizzi del browser?',
+        options: [
+          'Che la connessione fra browser e sito è cifrata (HTTPS)',
+          'Che il sito è sicuramente affidabile e senza contenuti falsi',
+          'Che il sito non raccoglie alcun dato personale'
+        ],
+        correct: 0,
+        explanation: 'Il lucchetto segnala una connessione cifrata: protegge i dati durante il trasferimento, ma non garantisce da solo che i contenuti del sito siano veri o affidabili.'
+      },
+    ],
+  });
+
+  MatchingEngine.mount(document.getElementById('match-web'), {
+    storageKey: 'g2-match-web',
+    leftTitle: 'Termine',
+    rightTitle: 'Definizione',
+    pairs: [
+      { left: 'Browser', right: 'Programma per navigare e visualizzare le pagine web (es. Chrome, Firefox, Edge)' },
+      { left: 'URL', right: "L'indirizzo univoco di una pagina web, ad es. https://www.comune.it" },
+      { left: 'Motore di ricerca', right: 'Servizio che trova informazioni e siti a partire da parole chiave (es. Google)' },
+      { left: 'Cookie', right: 'Piccolo file che un sito salva nel browser per ricordare preferenze o accessi' },
+      { left: 'Allegato', right: "File collegato a un'email, che si può scaricare e aprire" },
+      { left: 'Cloud', right: 'Spazio di archiviazione online che permette di salvare e condividere file da più dispositivi' },
+      { left: 'Download', right: 'Trasferimento di un file da Internet al proprio dispositivo' },
+      { left: 'Password robusta', right: 'Combinazione lunga di lettere, numeri e simboli, diversa per ogni servizio e difficile da indovinare' },
+    ]
+  });
+</script>
+</body>
+</html>

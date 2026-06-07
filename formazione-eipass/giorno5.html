@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giorno 5 — Presentazioni &amp; Sicurezza | Formazione EIPASS</title>
+<link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-badge">E7</div>
+      <div>
+        <div class="brand-title">Formazione EIPASS 7 Moduli 6.0</div>
+        <div class="brand-sub">Percorso interattivo · 5 giornate</div>
+      </div>
+    </a>
+    <div class="score-pill"><span class="star">★</span> <span id="total-score">0</span> punti totali</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="card">
+    <span class="badge rose">Giorno 5 di 5 · Gran finale 🏁</span>
+    <h1>Presentazioni (PowerPoint) &amp; Sicurezza informatica 🎤🔒</h1>
+    <p class="lead">
+      Ultima giornata: parliamo di come costruire slide davvero efficaci e di cosa serve sapere su sicurezza, privacy e GDPR
+      nel lavoro di ogni giorno. Si chiude con il <strong>quizzone finale</strong>: il punteggio che farete qui si somma
+      a quello accumulato nei quattro giorni precedenti — diamo il massimo!
+    </p>
+  </div>
+
+  <!-- ATTIVITÀ 1: QUIZZONE FINALE -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge rose">Attività 1 · Quizzone finale a tempo</span>
+        <h2 style="margin:0">Slide efficaci, sicurezza e privacy: quanto ne sappiamo?</h2>
+      </div>
+    </div>
+    <p class="lead">8 domande, 25 secondi a testa. Si parte da alcuni esempi di diapositive da migliorare, poi si passa alla sicurezza informatica.</p>
+    <div id="quiz-finale"></div>
+  </div>
+
+  <!-- ATTIVITÀ 2: ABBINAMENTO SICUREZZA -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge green">Attività 2 · Abbinamento</span>
+        <h2 style="margin:0">Il vocabolario della sicurezza informatica</h2>
+      </div>
+    </div>
+    <p class="lead">Abbina ogni termine alla sua definizione corretta — l'ultimo sforzo del percorso!</p>
+    <div id="match-sicurezza"></div>
+  </div>
+
+  <div class="card" style="text-align:center; margin-top:24px">
+    <span class="badge">Complimenti per il percorso! 🎉</span>
+    <h2>È stato un piacere lavorare insieme</h2>
+    <p class="lead">Il punteggio totale del percorso resta visibile in alto e nella pagina principale: confrontatevi e festeggiate i risultati raggiunti in queste 5 giornate.</p>
+    <a class="btn btn-primary" href="index.html" style="margin-top:8px">← Torna al percorso completo</a>
+  </div>
+
+  <div class="footer-nav">
+    <a class="btn btn-secondary" href="giorno4.html">← Giorno 4</a>
+    <span></span>
+  </div>
+
+</div>
+
+<script src="shared/score.js"></script>
+<script src="shared/matching-engine.js"></script>
+<script src="shared/quiz-engine.js"></script>
+<script>
+  document.getElementById('total-score').textContent = EipassScore.totals().score;
+
+  QuizEngine.mount(document.getElementById('quiz-finale'), {
+    storageKey: 'g5-quiz-finale',
+    timePerQuestion: 25,
+    questions: [
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">🖥️ Diapositiva 4 di 12</div>
+          <div class="scenario-body" style="font-size:0.8rem; line-height:1.6">
+            <strong>Il bilancio del progetto</strong><br>
+            Quest'anno il progetto ha registrato una crescita significativa rispetto all'anno precedente, con un incremento del budget di circa il 15% e il coinvolgimento di oltre 40 persone di diversi reparti, che hanno contribuito a tutte le fasi: dalla progettazione iniziale al collaudo finale, fino alla presentazione dei risultati al pubblico esterno e agli stakeholder...
+          </div></div>`,
+        question: 'Cosa si potrebbe migliorare in questa diapositiva?',
+        options: [
+          'Ridurre il testo a pochi punti chiave (es. "+15% budget", "40 persone coinvolte"), lasciando i dettagli al parlato',
+          'Aumentare ulteriormente la quantità di testo, per essere più precisi possibile',
+          'Scrivere tutto in corsivo per renderlo più elegante',
+          'Aggiungere altri tre paragrafi con la cronologia completa del progetto'
+        ],
+        correct: 0,
+        explanation: 'Le slide efficaci sostengono il discorso, non lo sostituiscono: poche parole chiave, numeri e immagini comunicano più di un muro di testo che il pubblico finirebbe per non leggere.'
+      },
+      {
+        question: 'Qual è una regola pratica spesso citata per non sovraccaricare di testo una slide?',
+        options: [
+          'La regola del "6x6": indicativamente, non più di 6 righe per slide e non più di 6 parole per riga',
+          'Scrivere sempre almeno 200 parole a slide per essere esaurienti',
+          'Una sola parola per slide, sempre',
+          'Non esistono regole: dipende solo dai gusti personali'
+        ],
+        correct: 0,
+        explanation: 'Regole come il "6x6" sono linee guida (non leggi rigide) che aiutano a mantenere le slide leggibili anche da lontano, lasciando spazio al relatore.'
+      },
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">🖥️ Diapositiva 7 di 12</div>
+          <div class="scenario-body">
+            <div style="color:#d6dbe3; background:#ffffff; padding:16px; border-radius:8px; text-align:center; font-weight:700; border:1px dashed #e2e8f0">
+              I prossimi passi del progetto
+            </div>
+          </div></div>`,
+        question: 'Qual è il problema principale di questa diapositiva?',
+        options: [
+          'Il contrasto tra testo e sfondo è troppo basso: diventa difficile da leggere, specialmente da lontano o per chi ha difficoltà visive',
+          'Il testo è troppo breve per essere un titolo',
+          'Manca un\'immagine decorativa di sfondo',
+          'Il titolo dovrebbe essere scritto in corsivo'
+        ],
+        correct: 0,
+        explanation: 'Un buon contrasto fra testo e sfondo è essenziale per leggibilità e accessibilità: meglio testo scuro su sfondo chiaro (o viceversa), evitando accostamenti "deboli" come grigio chiaro su bianco.'
+      },
+      {
+        question: 'Perché è utile mantenere lo stesso tema grafico in tutta la presentazione?',
+        options: [
+          'Dà un\'impressione di ordine e professionalità, e aiuta il pubblico a seguire più facilmente i contenuti',
+          'Perché altrimenti il file diventa troppo pesante da inviare via email',
+          'Perché il programma non permette di cambiarlo',
+          'Non è importante: ogni slide può avere uno stile diverso'
+        ],
+        correct: 0,
+        explanation: 'La coerenza grafica trasmette professionalità e riduce le distrazioni: il pubblico si concentra sul contenuto, non su quanto cambia lo stile da una slide all\'altra.'
+      },
+      {
+        question: 'Cos\'è, in breve, il GDPR e perché riguarda anche il lavoro d\'ufficio quotidiano?',
+        options: [
+          'È il Regolamento europeo sulla protezione dei dati personali: riguarda come si raccolgono, usano e conservano i dati delle persone, anche nei documenti di lavoro di tutti i giorni',
+          'È un programma antivirus europeo obbligatorio per le aziende',
+          'È lo standard tecnico per comprimere i file',
+          'È un tipo di backup automatico nel cloud'
+        ],
+        correct: 0,
+        explanation: 'Il GDPR (Regolamento Generale sulla Protezione dei Dati) stabilisce le regole sul trattamento dei dati personali: vale anche per email, elenchi su fogli di calcolo, archivi di documenti, ecc.'
+      },
+      {
+        question: 'Cosa si intende, in generale, con il termine "malware"?',
+        options: [
+          'Un termine generico per indicare software dannoso: virus, trojan, ransomware, spyware e simili',
+          'Un componente hardware difettoso',
+          'Un formato di file per immagini ad alta qualità',
+          'Un tipo di connessione di rete poco sicura'
+        ],
+        correct: 0,
+        explanation: '"Malware" (da "malicious software") è un termine ombrello che racchiude virus, trojan, ransomware, spyware e altri programmi pensati per danneggiare o sfruttare un dispositivo.'
+      },
+      {
+        question: 'Perché è importante effettuare regolarmente un backup (copia di sicurezza) dei propri file?',
+        options: [
+          'Perché consente di recuperare i dati in caso di guasto, furto, errore umano o attacco informatico (es. ransomware)',
+          'Perché rende il computer più veloce nell\'uso quotidiano',
+          'Perché libera automaticamente spazio su disco',
+          'Perché impedisce ai virus di entrare nel sistema'
+        ],
+        correct: 0,
+        explanation: 'Un backup aggiornato (su un supporto separato o nel cloud) è la "rete di sicurezza" che evita di perdere tutto in caso di imprevisti, dai guasti hardware ai ransomware che cifrano i file.'
+      },
+      {
+        question: 'Quale tra queste è una buona pratica di sicurezza informatica nella vita lavorativa quotidiana?',
+        options: [
+          'Mantenere aggiornati sistema operativo e programmi, e usare password diverse e robuste per servizi diversi',
+          'Usare la stessa password ovunque, così è più facile da ricordare',
+          'Disattivare l\'antivirus quando rallenta il computer',
+          'Annotare le password su un foglietto vicino allo schermo, per non dimenticarle'
+        ],
+        correct: 0,
+        explanation: 'Gli aggiornamenti chiudono le falle di sicurezza note; password diverse e robuste per ogni servizio limitano i danni nel caso una di esse venga compromessa.'
+      },
+    ],
+  });
+
+  MatchingEngine.mount(document.getElementById('match-sicurezza'), {
+    storageKey: 'g5-match-sicurezza',
+    leftTitle: 'Termine',
+    rightTitle: 'Definizione',
+    pairs: [
+      { left: 'Malware', right: 'Termine generico per software dannoso: virus, trojan, ransomware, spyware...' },
+      { left: 'Phishing', right: 'Tentativo di ingannare una persona per farsi consegnare dati personali o credenziali' },
+      { left: 'Ransomware', right: "Software che blocca l'accesso ai file e chiede un riscatto per sbloccarli" },
+      { left: 'Backup', right: 'Copia di sicurezza dei dati, utile per recuperarli in caso di guasti o attacchi' },
+      { left: 'Antivirus', right: 'Programma che individua e blocca software dannosi' },
+      { left: 'Autenticazione a due fattori', right: 'Doppio livello di verifica dell\'identità, ad es. password + codice via SMS o app' },
+      { left: 'GDPR', right: 'Regolamento europeo che disciplina la raccolta e l\'uso dei dati personali' },
+      { left: 'Firewall', right: 'Sistema che filtra il traffico di rete per bloccare accessi non autorizzati' },
+    ]
+  });
+</script>
+</body>
+</html>

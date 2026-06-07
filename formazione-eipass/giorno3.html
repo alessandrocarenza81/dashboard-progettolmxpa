@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giorno 3 — Elaborazione testi (Word) | Formazione EIPASS</title>
+<link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-badge">E7</div>
+      <div>
+        <div class="brand-title">Formazione EIPASS 7 Moduli 6.0</div>
+        <div class="brand-sub">Percorso interattivo · 5 giornate</div>
+      </div>
+    </a>
+    <div class="score-pill"><span class="star">★</span> <span id="total-score">0</span> punti totali</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="card">
+    <span class="badge">Giorno 3 di 5</span>
+    <h1>Elaborazione testi (Word) 📝</h1>
+    <p class="lead">
+      Oggi ci concentriamo su come scrivere documenti più velocemente e in modo più professionale: scorciatoie da tastiera,
+      stili e formattazione. Iniziamo con una sfida sui tasti rapidi — quanti ne conoscete già?
+    </p>
+  </div>
+
+  <!-- ATTIVITÀ 1: ABBINAMENTO SCORCIATOIE -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge green">Attività 1 · Abbinamento</span>
+        <h2 style="margin:0">Scorciatoie da tastiera: a cosa servono?</h2>
+      </div>
+    </div>
+    <p class="lead">Abbina ogni combinazione di tasti alla sua funzione. Suggerimento: provatele dal vivo su un documento di prova!</p>
+    <div id="match-shortcut"></div>
+  </div>
+
+  <!-- ATTIVITÀ 2: QUIZ FORMATTAZIONE -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge amber">Attività 2 · Quiz a tempo</span>
+        <h2 style="margin:0">Formattazione e stili: scelte intelligenti</h2>
+      </div>
+    </div>
+    <p class="lead">5 domande, 25 secondi a testa, con qualche documento di esempio da osservare.</p>
+    <div id="quiz-word"></div>
+  </div>
+
+  <div class="footer-nav">
+    <a class="btn btn-secondary" href="giorno2.html">← Giorno 2</a>
+    <a class="btn btn-primary" href="giorno4.html">Giorno 4: Excel →</a>
+  </div>
+
+</div>
+
+<script src="shared/score.js"></script>
+<script src="shared/matching-engine.js"></script>
+<script src="shared/quiz-engine.js"></script>
+<script>
+  document.getElementById('total-score').textContent = EipassScore.totals().score;
+
+  MatchingEngine.mount(document.getElementById('match-shortcut'), {
+    storageKey: 'g3-match-shortcut',
+    leftTitle: 'Scorciatoia',
+    rightTitle: 'Cosa fa',
+    pairs: [
+      { left: 'Ctrl + C', right: "Copia l'elemento selezionato" },
+      { left: 'Ctrl + V', right: "Incolla l'elemento copiato o tagliato" },
+      { left: 'Ctrl + X', right: "Taglia (sposta) l'elemento selezionato" },
+      { left: 'Ctrl + Z', right: "Annulla l'ultima azione" },
+      { left: 'Ctrl + S', right: 'Salva il documento' },
+      { left: 'Ctrl + B', right: 'Mette in grassetto il testo selezionato' },
+      { left: 'Ctrl + A', right: 'Seleziona tutto il contenuto del documento' },
+      { left: 'Ctrl + P', right: 'Apre la finestra di stampa' },
+    ]
+  });
+
+  QuizEngine.mount(document.getElementById('quiz-word'), {
+    storageKey: 'g3-quiz-word',
+    timePerQuestion: 25,
+    questions: [
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">📄 Relazione_2024.docx — Word</div>
+          <div class="scenario-body">
+            <div style="font-size:1.35em;font-weight:700">Relazione annuale 2024</div>
+            <div style="margin-top:8px">Di seguito il resoconto delle attività svolte nel corso dell'anno, suddiviso per trimestre...</div>
+          </div></div>`,
+        question: 'Il titolo appare più grande, in grassetto e con un aspetto diverso dal corpo del testo. Cosa è stato probabilmente applicato?',
+        options: [
+          "Uno stile di paragrafo predefinito per i titoli (es. 'Titolo 1')",
+          'Il correttore ortografico',
+          'La funzione di stampa unione',
+          'Un controllo automatico della grammatica'
+        ],
+        correct: 0,
+        explanation: "Gli stili predefiniti (Titolo 1, Titolo 2, Corpo del testo...) garantiscono coerenza visiva e permettono, in più, di generare automaticamente un sommario."
+      },
+      {
+        question: 'Quale di queste è considerata una buona pratica nella formattazione di un documento professionale?',
+        options: [
+          'Usare in modo coerente pochi stili (titoli, corpo del testo, elenchi) in tutto il documento',
+          'Usare quanti più caratteri e colori diversi possibile, per renderlo più vivace',
+          'Scrivere tutto in maiuscolo per dare maggiore enfasi',
+          'Cambiare dimensione del font ad ogni paragrafo'
+        ],
+        correct: 0,
+        explanation: 'Coerenza e sobrietà rendono un documento più leggibile e professionale: troppi stili diversi distraggono e comunicano disordine.'
+      },
+      {
+        question: "A cosa serve la funzione 'Interlinea' in un elaboratore di testi?",
+        options: [
+          'A regolare lo spazio verticale tra le righe di un paragrafo',
+          'A cambiare il colore del testo selezionato',
+          'A inserire automaticamente la data corrente',
+          'A correggere gli errori di battitura'
+        ],
+        correct: 0,
+        explanation: "L'interlinea regola la distanza fra le righe: un valore di 1,5 o doppio rende più comoda la lettura di testi lunghi."
+      },
+      {
+        question: "A cosa serve la funzione 'Stampa unione' (mail merge)?",
+        options: [
+          'A generare automaticamente più copie personalizzate di uno stesso documento partendo da un elenco di dati (es. lettere con nomi diversi)',
+          'A correggere automaticamente gli errori grammaticali',
+          'A unire più immagini in un unico file',
+          'A comprimere il documento per inviarlo via email'
+        ],
+        correct: 0,
+        explanation: 'La stampa unione combina un modello di documento con un elenco di dati (es. un foglio Excel con nomi e indirizzi) per produrre automaticamente una versione personalizzata per ciascun destinatario.'
+      },
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">📄 Procedura_richiesta_ferie.docx — Word</div>
+          <div class="scenario-body">
+            <strong>Come richiedere le ferie:</strong>
+            <div style="margin-top:6px">1. Compilare il modulo sul portale&nbsp;&nbsp;&nbsp; 2. Farlo firmare al responsabile&nbsp;&nbsp;&nbsp; 3. Inviarlo all'ufficio personale</div>
+          </div></div>`,
+        question: 'Per presentare questi tre passaggi in modo chiaro nel documento, quale tipo di elenco è più indicato?',
+        options: [
+          'Un elenco numerato, perché comunica un ordine preciso da seguire',
+          'Un elenco puntato, perché è esteticamente più curato',
+          'Nessun elenco: meglio scrivere tutto in un unico paragrafo',
+          'Una tabella con sfondo colorato su ogni riga'
+        ],
+        correct: 0,
+        explanation: "L'elenco numerato comunica una sequenza ('prima... poi... infine'); quello puntato è preferibile per elementi di pari importanza senza un ordine specifico."
+      },
+    ],
+  });
+</script>
+</body>
+</html>

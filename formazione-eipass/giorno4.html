@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giorno 4 — Fogli di calcolo (Excel) | Formazione EIPASS</title>
+<link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-badge">E7</div>
+      <div>
+        <div class="brand-title">Formazione EIPASS 7 Moduli 6.0</div>
+        <div class="brand-sub">Percorso interattivo · 5 giornate</div>
+      </div>
+    </a>
+    <div class="score-pill"><span class="star">★</span> <span id="total-score">0</span> punti totali</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="card">
+    <span class="badge">Giorno 4 di 5</span>
+    <h1>Fogli di calcolo (Excel) 📊</h1>
+    <p class="lead">
+      Oggi lavoriamo con celle, formule e grafici. Si parte con una "caccia all'errore": in ogni foglio mostrato
+      qualcosa non torna — riuscite a scoprire cosa, prima dello scadere del tempo?
+    </p>
+  </div>
+
+  <!-- ATTIVITÀ 1: QUIZ CACCIA ALL'ERRORE -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge rose">Attività 1 · Quiz a tempo · Caccia all'errore</span>
+        <h2 style="margin:0">Cosa non torna in questo foglio di calcolo?</h2>
+      </div>
+    </div>
+    <p class="lead">Osserva la formula e il risultato mostrato, poi individua il problema.</p>
+    <div id="quiz-excel"></div>
+  </div>
+
+  <!-- ATTIVITÀ 2: ABBINAMENTO FORMULE -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge green">Attività 2 · Abbinamento</span>
+        <h2 style="margin:0">Formule di Excel: cosa calcolano?</h2>
+      </div>
+    </div>
+    <p class="lead">Abbina ogni formula (o riferimento) alla sua funzione.</p>
+    <div id="match-formule"></div>
+  </div>
+
+  <div class="footer-nav">
+    <a class="btn btn-secondary" href="giorno3.html">← Giorno 3</a>
+    <a class="btn btn-primary" href="giorno5.html">Giorno 5: PowerPoint &amp; Sicurezza →</a>
+  </div>
+
+</div>
+
+<script src="shared/score.js"></script>
+<script src="shared/matching-engine.js"></script>
+<script src="shared/quiz-engine.js"></script>
+<script>
+  document.getElementById('total-score').textContent = EipassScore.totals().score;
+
+  QuizEngine.mount(document.getElementById('quiz-excel'), {
+    storageKey: 'g4-quiz-excel',
+    timePerQuestion: 30,
+    questions: [
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">📊 Spese_trimestre.xlsx — Foglio1</div>
+          <div class="scenario-body"><table>
+            <tr><th></th><th>A</th><th>B</th></tr>
+            <tr><td>1</td><td>Gennaio</td><td>1.200 €</td></tr>
+            <tr><td>2</td><td>Febbraio</td><td>980 €</td></tr>
+            <tr><td>3</td><td>Marzo</td><td>1.450 €</td></tr>
+            <tr><td>4</td><td><strong>Totale</strong></td><td><strong>=SOMMA(B1:B2)</strong> → 2.180 €</td></tr>
+          </table></div></div>`,
+        question: 'Osservando la formula del Totale, cosa non va?',
+        options: [
+          "L'intervallo B1:B2 esclude la riga di Marzo (B3): il totale calcolato è sbagliato",
+          'Il simbolo dell\'euro non dovrebbe comparire nella cella',
+          'La parola "Totale" dovrebbe essere scritta in maiuscolo',
+          'Le celle dovrebbero avere uno sfondo colorato'
+        ],
+        correct: 0,
+        explanation: 'La formula corretta sarebbe =SOMMA(B1:B3): includendo anche Marzo, il totale risulterebbe 3.630 € e non 2.180 €.'
+      },
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">📊 Listino.xlsx — Foglio1</div>
+          <div class="scenario-body"><table>
+            <tr><th></th><th>A</th><th>B</th><th>C</th></tr>
+            <tr><td>1</td><td>Prodotto</td><td>Prezzo</td><td>Prezzo + IVA 22%</td></tr>
+            <tr><td>2</td><td>Sedia</td><td>50 €</td><td>=B2*1,22 → 61 €</td></tr>
+            <tr><td>3</td><td>Tavolo</td><td>120 €</td><td><strong>=B2*1,22 → 61 €</strong></td></tr>
+          </table></div></div>`,
+        question: 'La formula in C3 è stata copiata da C2. Qual è il problema?',
+        options: [
+          'Fa ancora riferimento a B2 invece di B3: per il Tavolo mostra il prezzo (con IVA) della Sedia',
+          'Manca il simbolo dell\'euro nel risultato',
+          'Non c\'è alcun problema: il risultato è corretto',
+          'La percentuale IVA dovrebbe essere scritta come 22 e non come 1,22'
+        ],
+        correct: 0,
+        explanation: "Copiando una formula con riferimento relativo (B2), normalmente Excel adatta il riferimento alla nuova riga (B3 in C3). Se resta B2, è probabile che il riferimento sia stato 'bloccato' per errore o riscritto a mano."
+      },
+      {
+        question: 'Cosa calcola la funzione =MEDIA(B2:B10)?',
+        options: [
+          'La media aritmetica dei valori contenuti nelle celle da B2 a B10',
+          'La somma dei valori contenuti nelle celle da B2 a B10',
+          'Il valore più alto tra le celle da B2 a B10',
+          'Il numero di celle non vuote tra B2 e B10'
+        ],
+        correct: 0,
+        explanation: '=MEDIA() restituisce la media aritmetica dell\'intervallo indicato. Per la somma si usa =SOMMA(), per il valore massimo =MAX().'
+      },
+      {
+        question: 'A cosa serve, soprattutto, inserire un grafico in un foglio di calcolo?',
+        options: [
+          'A rappresentare visivamente i dati, per individuare più facilmente tendenze e confronti',
+          'A correggere automaticamente gli errori presenti nei dati',
+          'A proteggere il foglio con una password',
+          'A ridurre il peso del file'
+        ],
+        correct: 0,
+        explanation: 'Un grafico traduce i numeri in immagini, rendendo evidenti a colpo d\'occhio andamenti nel tempo, confronti e proporzioni che in una tabella sarebbero meno immediati.'
+      },
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">📊 Spese_2024.xlsx — Foglio1</div>
+          <div class="scenario-body"><table>
+            <tr><th></th><th>A</th><th>B</th></tr>
+            <tr><td>1</td><td>Gennaio</td><td>500</td></tr>
+            <tr><td>2</td><td>Febbraio</td><td>700</td></tr>
+            <tr><td>3</td><td>Marzo</td><td>650</td></tr>
+            <tr><td>4</td><td><strong>Totale</strong></td><td><strong>=SOMMA(A1:A3) → 0</strong></td></tr>
+          </table></div></div>`,
+        question: 'Il Totale mostra 0 invece della somma delle spese. Perché, con ogni probabilità?',
+        options: [
+          'La formula somma la colonna A, che contiene testo (i nomi dei mesi), invece della colonna B con i numeri',
+          'I numeri sono scritti senza il simbolo dell\'euro',
+          'Manca un punto e virgola alla fine della formula',
+          'Il foglio deve essere prima salvato per calcolare correttamente'
+        ],
+        correct: 0,
+        explanation: 'La somma di celle che contengono testo restituisce 0 (il testo viene ignorato). La formula corretta sarebbe =SOMMA(B1:B3), riferita alla colonna con i valori numerici.'
+      },
+    ],
+  });
+
+  MatchingEngine.mount(document.getElementById('match-formule'), {
+    storageKey: 'g4-match-formule',
+    leftTitle: 'Formula / riferimento',
+    rightTitle: 'Cosa fa',
+    pairs: [
+      { left: '=SOMMA(intervallo)', right: 'Calcola la somma dei valori nelle celle indicate' },
+      { left: '=MEDIA(intervallo)', right: 'Calcola la media aritmetica dei valori nelle celle indicate' },
+      { left: '=MAX(intervallo)', right: "Restituisce il valore più alto nell'intervallo indicato" },
+      { left: '=MIN(intervallo)', right: "Restituisce il valore più basso nell'intervallo indicato" },
+      { left: '=SE(condizione; vero; falso)', right: 'Restituisce un risultato diverso a seconda che una condizione sia vera o falsa' },
+      { left: '=CONTA.SE(intervallo; criterio)', right: 'Conta quante celle in un intervallo soddisfano una condizione data' },
+      { left: '=OGGI()', right: 'Restituisce la data corrente' },
+      { left: '$A$1 (riferimento assoluto)', right: 'Riferimento a una cella che non cambia quando la formula viene copiata altrove' },
+    ]
+  });
+</script>
+</body>
+</html>
