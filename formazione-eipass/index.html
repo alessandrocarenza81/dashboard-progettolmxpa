@@ -23,17 +23,22 @@
 
 <div class="wrap">
 
+  <div id="name-bar" class="name-bar"></div>
+
   <div class="card">
     <span class="badge">Percorso di 5 giornate</span>
     <h1>Benvenuti/e! 👋</h1>
     <p class="lead">
       In questa pagina trovate le attività interattive che accompagneranno la spiegazione frontale e il PDF dei contenuti EIPASS,
-      giorno per giorno: quiz a tempo, esercizi di abbinamento, scenari realistici da analizzare insieme.
-      Ogni esercizio dà un punteggio che si somma a quello degli altri giorni — provate a migliorarvi di giornata in giornata!
+      giorno per giorno: quiz a tempo, esercizi di abbinamento, scenari realistici da analizzare insieme, e una scheda di
+      ripasso per ciascuna giornata. Ogni esercizio dà un punteggio che si somma a quello degli altri giorni — provate a
+      migliorarvi di giornata in giornata!
     </p>
     <p class="muted" style="margin-top:10px">
-      ℹ️ Il punteggio resta salvato solo su questo dispositivo/browser (nessun dato viene inviato altrove).
-      Se cambiate computer o cancellate la cronologia, riparte da zero — non è un problema, è solo per tenere il ritmo durante le giornate.
+      ℹ️ Il punteggio resta sempre salvato anche su questo dispositivo/browser, così il riepilogo qui sopra funziona pure
+      offline. Se inserite il vostro nome (vedi il riquadro in alto), i risultati delle attività vengono inoltre inviati
+      al docente, che può seguire i progressi della classe giornata per giornata — l'unico dato condiviso è nome e punteggio,
+      nient'altro.
     </p>
   </div>
 
@@ -99,18 +104,21 @@
 </div>
 
 <script src="shared/score.js"></script>
+<script src="shared/cloud-score.js"></script>
 <script>
+  CloudScore.mountNameBar(document.getElementById('name-bar'));
+
   function refreshHeader() {
     const t = EipassScore.totals();
     document.getElementById('total-score').textContent = t.score;
     document.getElementById('total-done').textContent = t.done;
 
     const dayActivities = {
-      g1: ['g1-match-hardware', 'g1-quiz-sistema'],
-      g2: ['g2-quiz-phishing', 'g2-match-web'],
-      g3: ['g3-match-shortcut', 'g3-quiz-word'],
-      g4: ['g4-quiz-excel', 'g4-match-formule'],
-      g5: ['g5-quiz-finale', 'g5-match-sicurezza'],
+      g1: ['g1-match-hardware', 'g1-quiz-sistema', 'g1-match-filetypes'],
+      g2: ['g2-quiz-phishing', 'g2-match-web', 'g2-quiz-netiquette'],
+      g3: ['g3-match-shortcut', 'g3-quiz-word', 'g3-match-strumenti'],
+      g4: ['g4-quiz-excel', 'g4-match-formule', 'g4-match-strumenti'],
+      g5: ['g5-quiz-finale', 'g5-match-sicurezza', 'g5-match-abitudini'],
     };
     const all = EipassScore.getAll();
     document.querySelectorAll('.day-progress').forEach(el => {

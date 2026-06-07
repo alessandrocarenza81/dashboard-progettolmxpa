@@ -23,6 +23,8 @@
 
 <div class="wrap">
 
+  <div id="name-bar" class="name-bar"></div>
+
   <div class="card">
     <span class="badge rose">Giorno 5 di 5 · Gran finale 🏁</span>
     <h1>Presentazioni (PowerPoint) &amp; Sicurezza informatica 🎤🔒</h1>
@@ -33,6 +35,19 @@
     </p>
   </div>
 
+  <div class="card">
+    <span class="badge green">Scheda di approfondimento</span>
+    <h2>Slide efficaci e sicurezza: il decalogo del corso</h2>
+    <ul class="lead" style="padding-left:20px; margin:0">
+      <li>Le slide <strong>sostengono</strong> il discorso, non lo sostituiscono: poche parole chiave, numeri, immagini — i dettagli restano nel parlato.</li>
+      <li>Regola pratica "<strong>6×6</strong>": indicativamente non più di 6 righe per slide e 6 parole per riga (è una linea guida, non una legge).</li>
+      <li>Il <strong>contrasto</strong> tra testo e sfondo deve essere alto (es. testo scuro su sfondo chiaro) per essere leggibile anche da lontano.</li>
+      <li>Mantieni un <strong>tema grafico coerente</strong> in tutta la presentazione: trasmette professionalità e riduce le distrazioni.</li>
+      <li><strong>GDPR</strong> = regole europee su come si raccolgono, usano e conservano i dati personali, anche nei documenti di lavoro quotidiani.</li>
+      <li><strong>Malware, phishing, ransomware</strong>: conoscerli aiuta a riconoscerli. <strong>Backup regolari</strong>, <strong>aggiornamenti</strong> e <strong>password robuste e diverse</strong> restano le difese più efficaci ed economiche.</li>
+    </ul>
+  </div>
+
   <!-- ATTIVITÀ 1: QUIZZONE FINALE -->
   <div class="activity">
     <div class="activity-head">
@@ -41,7 +56,7 @@
         <h2 style="margin:0">Slide efficaci, sicurezza e privacy: quanto ne sappiamo?</h2>
       </div>
     </div>
-    <p class="lead">8 domande, 25 secondi a testa. Si parte da alcuni esempi di diapositive da migliorare, poi si passa alla sicurezza informatica.</p>
+    <p class="lead">10 domande, 45 secondi a testa. Si parte da alcuni esempi di diapositive da migliorare, poi si passa alla sicurezza informatica.</p>
     <div id="quiz-finale"></div>
   </div>
 
@@ -53,8 +68,20 @@
         <h2 style="margin:0">Il vocabolario della sicurezza informatica</h2>
       </div>
     </div>
-    <p class="lead">Abbina ogni termine alla sua definizione corretta — l'ultimo sforzo del percorso!</p>
+    <p class="lead">Abbina ogni termine alla sua definizione corretta.</p>
     <div id="match-sicurezza"></div>
+  </div>
+
+  <!-- ATTIVITÀ 3: ABBINAMENTO BUONE ABITUDINI -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge green">Attività 3 · Abbinamento</span>
+        <h2 style="margin:0">Buone abitudini digitali quotidiane</h2>
+      </div>
+    </div>
+    <p class="lead">Abbina ogni comportamento al motivo per cui è una buona pratica — l'ultimo sforzo del percorso!</p>
+    <div id="match-abitudini"></div>
   </div>
 
   <div class="card" style="text-align:center; margin-top:24px">
@@ -72,14 +99,16 @@
 </div>
 
 <script src="shared/score.js"></script>
+<script src="shared/cloud-score.js"></script>
 <script src="shared/matching-engine.js"></script>
 <script src="shared/quiz-engine.js"></script>
 <script>
   document.getElementById('total-score').textContent = EipassScore.totals().score;
+  CloudScore.mountNameBar(document.getElementById('name-bar'));
 
   QuizEngine.mount(document.getElementById('quiz-finale'), {
     storageKey: 'g5-quiz-finale',
-    timePerQuestion: 25,
+    timePerQuestion: 45,
     questions: [
       {
         scenario: `<div class="scenario">
@@ -182,6 +211,34 @@
         correct: 0,
         explanation: 'Gli aggiornamenti chiudono le falle di sicurezza note; password diverse e robuste per ogni servizio limitano i danni nel caso una di esse venga compromessa.'
       },
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">🖥️ Diapositiva 9 di 12</div>
+          <div class="scenario-body" style="text-align:center">
+            <div style="font-weight:700; margin-bottom:6px">Risultati del trimestre</div>
+            <div class="muted">[ogni parola del titolo entra volando da una direzione diversa, con suoni a ogni clic, e il grafico ruota due volte prima di fermarsi]</div>
+          </div></div>`,
+        question: 'L\'autore ha aggiunto molte animazioni ed effetti sonori a questa slide. Che effetto rischia di avere sul pubblico?',
+        options: [
+          'Rischia di distrarre dal contenuto e di rallentare la presentazione: animazioni ed effetti vanno usati con parsimonia, solo quando aiutano davvero a comunicare',
+          'Renderà sicuramente la presentazione più memorabile e professionale',
+          'Non avrà alcun effetto sul pubblico',
+          'Aiuterà il pubblico a leggere più velocemente i contenuti'
+        ],
+        correct: 0,
+        explanation: 'Animazioni e suoni eccessivi spostano l\'attenzione dal messaggio all\'effetto speciale: usati con misura possono guidare lo sguardo, ma in eccesso stancano e rallentano.'
+      },
+      {
+        question: 'Stai per condividere pubblicamente alcune slide che contengono per errore nomi e indirizzi email di alcuni colleghi. Cosa è opportuno fare prima di pubblicarle?',
+        options: [
+          'Rimuovere o oscurare quei dati personali, perché diffonderli senza necessità e senza consenso non rispetta i principi del GDPR sulla protezione dei dati',
+          'Pubblicarle comunque: una volta create, le slide non si possono più modificare',
+          'Cambiare solo il titolo della presentazione',
+          'Aggiungere altri dati personali, tanto il danno è già fatto'
+        ],
+        correct: 0,
+        explanation: 'Il GDPR richiede di trattare i dati personali con cura: prima di una condivisione ampia conviene sempre chiedersi se quei dati siano necessari e, in caso contrario, rimuoverli o anonimizzarli.'
+      },
     ],
   });
 
@@ -198,6 +255,22 @@
       { left: 'Autenticazione a due fattori', right: 'Doppio livello di verifica dell\'identità, ad es. password + codice via SMS o app' },
       { left: 'GDPR', right: 'Regolamento europeo che disciplina la raccolta e l\'uso dei dati personali' },
       { left: 'Firewall', right: 'Sistema che filtra il traffico di rete per bloccare accessi non autorizzati' },
+    ]
+  });
+
+  MatchingEngine.mount(document.getElementById('match-abitudini'), {
+    storageKey: 'g5-match-abitudini',
+    leftTitle: 'Comportamento',
+    rightTitle: 'Perché è una buona pratica',
+    pairs: [
+      { left: 'Aggiornare regolarmente programmi e sistema operativo', right: 'Chiude le falle di sicurezza note prima che possano essere sfruttate' },
+      { left: 'Bloccare lo schermo quando ci si allontana', right: 'Evita che altri possano usare il tuo account anche solo per pochi minuti' },
+      { left: 'Diffidare di allegati e link inattesi', right: 'Riduce il rischio di aprire malware o cadere in tentativi di phishing' },
+      { left: 'Fare backup regolari dei file importanti', right: 'Permette di recuperare i dati in caso di guasti, errori o attacchi ransomware' },
+      { left: 'Usare password diverse per ogni servizio', right: 'Limita i danni: se una viene scoperta, gli altri account restano protetti' },
+      { left: 'Evitare dati sensibili su Wi-Fi pubbliche non protette', right: 'Riduce il rischio che le informazioni viaggino senza adeguata protezione' },
+      { left: 'Condividere solo i dati personali necessari', right: 'Rispetta i principi del GDPR sulla protezione dei dati altrui' },
+      { left: 'Tenere ordinati file e cartelle', right: 'Fa risparmiare tempo e riduce gli errori dovuti a documenti sbagliati o duplicati' },
     ]
   });
 </script>

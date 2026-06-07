@@ -1,6 +1,8 @@
 /* Punteggio cumulativo condiviso tra le 5 giornate — salvato in localStorage del browser.
- * Ogni attività salva { score, total } sotto una chiave univoca; non c'è invio dati a server,
- * tutto resta sul dispositivo di chi sta facendo l'esercizio.
+ * Ogni attività salva { score, total } sotto una chiave univoca, così il riepilogo
+ * personale (in alto e nella pagina principale) funziona sempre, anche offline.
+ * Se l'allievo ha inserito il proprio nome, lo stesso risultato viene anche
+ * inoltrato al pannello del docente (vedi cloud-score.js).
  */
 const EipassScore = (function () {
   const KEY = 'eipass-formazione-progressi-v1';
@@ -16,6 +18,8 @@ const EipassScore = (function () {
     // conserva il miglior risultato ottenuto per quella attività
     if (!prev || score > prev.score) data[activityKey] = { score, total, date: new Date().toISOString() };
     localStorage.setItem(KEY, JSON.stringify(data));
+    // se disponibile, inoltra il risultato al pannello del docente (vedi cloud-score.js)
+    if (typeof CloudScore !== 'undefined') CloudScore.submit(activityKey, score, total);
   }
 
   function totals() {

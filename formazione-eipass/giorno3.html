@@ -23,6 +23,8 @@
 
 <div class="wrap">
 
+  <div id="name-bar" class="name-bar"></div>
+
   <div class="card">
     <span class="badge">Giorno 3 di 5</span>
     <h1>Elaborazione testi (Word) 📝</h1>
@@ -30,6 +32,19 @@
       Oggi ci concentriamo su come scrivere documenti più velocemente e in modo più professionale: scorciatoie da tastiera,
       stili e formattazione. Iniziamo con una sfida sui tasti rapidi — quanti ne conoscete già?
     </p>
+  </div>
+
+  <div class="card">
+    <span class="badge green">Scheda di approfondimento</span>
+    <h2>Documenti professionali: i punti fermi</h2>
+    <ul class="lead" style="padding-left:20px; margin:0">
+      <li>Usa gli <strong>stili predefiniti</strong> (Titolo 1, Titolo 2, Corpo del testo...) invece di formattare "a mano": restano coerenti e permettono di generare un sommario automatico.</li>
+      <li><strong>Coerenza</strong> prima di tutto: pochi font, poche dimensioni, pochi colori in tutto il documento.</li>
+      <li>L'<strong>interlinea</strong> (1,15-1,5) e i <strong>margini</strong> regolari rendono un testo lungo molto più comodo da leggere.</li>
+      <li><strong>Intestazione e piè di pagina</strong> permettono di ripetere automaticamente elementi come logo, titolo o numero di pagina su ogni foglio.</li>
+      <li>Elenco <strong>numerato</strong> per sequenze ordinate ("prima... poi..."), elenco <strong>puntato</strong> per elementi di pari importanza senza un ordine specifico.</li>
+      <li>Prima di condividere un documento, un giro di <strong>controllo ortografico</strong> e di rilettura evita brutte sorprese.</li>
+    </ul>
   </div>
 
   <!-- ATTIVITÀ 1: ABBINAMENTO SCORCIATOIE -->
@@ -52,8 +67,20 @@
         <h2 style="margin:0">Formattazione e stili: scelte intelligenti</h2>
       </div>
     </div>
-    <p class="lead">5 domande, 25 secondi a testa, con qualche documento di esempio da osservare.</p>
+    <p class="lead">7 domande, 45 secondi a testa, con qualche documento di esempio da osservare.</p>
     <div id="quiz-word"></div>
+  </div>
+
+  <!-- ATTIVITÀ 3: ABBINAMENTO STRUMENTI WORD -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge green">Attività 3 · Abbinamento</span>
+        <h2 style="margin:0">Strumenti dell'elaboratore di testi: a cosa servono?</h2>
+      </div>
+    </div>
+    <p class="lead">Abbina ogni strumento o funzione alla sua descrizione.</p>
+    <div id="match-strumenti"></div>
   </div>
 
   <div class="footer-nav">
@@ -64,10 +91,12 @@
 </div>
 
 <script src="shared/score.js"></script>
+<script src="shared/cloud-score.js"></script>
 <script src="shared/matching-engine.js"></script>
 <script src="shared/quiz-engine.js"></script>
 <script>
   document.getElementById('total-score').textContent = EipassScore.totals().score;
+  CloudScore.mountNameBar(document.getElementById('name-bar'));
 
   MatchingEngine.mount(document.getElementById('match-shortcut'), {
     storageKey: 'g3-match-shortcut',
@@ -87,7 +116,7 @@
 
   QuizEngine.mount(document.getElementById('quiz-word'), {
     storageKey: 'g3-quiz-word',
-    timePerQuestion: 25,
+    timePerQuestion: 45,
     questions: [
       {
         scenario: `<div class="scenario">
@@ -156,7 +185,52 @@
         correct: 0,
         explanation: "L'elenco numerato comunica una sequenza ('prima... poi... infine'); quello puntato è preferibile per elementi di pari importanza senza un ordine specifico."
       },
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">📄 Manuale_procedure.docx — Word, pagina 7 di 22</div>
+          <div class="scenario-body">
+            <div class="muted" style="border-bottom:1px solid #e2e8f0; padding-bottom:6px; margin-bottom:8px">Manuale procedure interne — Ufficio Personale</div>
+            <div>3.2 Richiesta di permessi: la procedura prevede...</div>
+            <div class="muted" style="border-top:1px solid #e2e8f0; margin-top:30px; padding-top:6px; text-align:right">Pagina 7</div>
+          </div></div>`,
+        question: 'In questo documento di 22 pagine, il titolo del manuale e il numero di pagina compaiono identici su ogni foglio. Quale strumento è stato probabilmente usato?',
+        options: [
+          'Intestazione e piè di pagina, che ripetono automaticamente contenuti fissi (titolo, numero di pagina, logo...) su ogni foglio',
+          'La funzione "Trova e sostituisci", applicata pagina per pagina',
+          'Il copia-incolla manuale del titolo su ognuna delle 22 pagine',
+          'Un collegamento ipertestuale verso un altro documento'
+        ],
+        correct: 0,
+        explanation: 'Intestazione e piè di pagina permettono di inserire una sola volta elementi che si vogliono ripetere automaticamente su ogni pagina, inclusa la numerazione progressiva.'
+      },
+      {
+        question: 'A cosa servono, in particolare, i "margini di pagina" in un documento?',
+        options: [
+          'A definire lo spazio vuoto attorno al testo, rendendo il documento più leggibile e ordinato, soprattutto in fase di stampa o rilegatura',
+          'A controllare automaticamente la grammatica del testo',
+          'A impostare la lingua del documento',
+          'A comprimere il file per occupare meno spazio'
+        ],
+        correct: 0,
+        explanation: 'I margini regolano lo spazio bianco ai bordi del foglio: troppo stretti rendono il testo "soffocato", troppo larghi sprecano spazio. I valori predefiniti vanno bene nella maggior parte dei casi.'
+      },
     ],
+  });
+
+  MatchingEngine.mount(document.getElementById('match-strumenti'), {
+    storageKey: 'g3-match-strumenti',
+    leftTitle: 'Strumento / funzione',
+    rightTitle: 'A cosa serve',
+    pairs: [
+      { left: 'Controllo ortografico', right: 'Segnala possibili errori di battitura e ortografia mentre scrivi' },
+      { left: 'Sommario automatico', right: 'Genera un indice dei contenuti basato sugli stili dei titoli usati nel documento' },
+      { left: 'Intestazione e piè di pagina', right: 'Aree che si ripetono in alto/basso su ogni pagina (es. logo, titolo, numero di pagina)' },
+      { left: 'Anteprima di stampa', right: 'Mostra come apparirà il documento prima di stamparlo davvero' },
+      { left: 'Trova e sostituisci', right: 'Cerca una parola o frase nel testo e la sostituisce ovunque con un\'altra' },
+      { left: 'Sinonimi (thesaurus)', right: 'Suggerisce parole con significato simile, utile per variare il testo' },
+      { left: 'Margini di pagina', right: "Lo spazio vuoto attorno al testo, regolabile per l'impaginazione" },
+      { left: 'Interlinea', right: 'Lo spazio verticale tra le righe di un paragrafo' },
+    ]
   });
 </script>
 </body>

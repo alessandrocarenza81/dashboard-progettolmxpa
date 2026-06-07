@@ -23,6 +23,8 @@
 
 <div class="wrap">
 
+  <div id="name-bar" class="name-bar"></div>
+
   <div class="card">
     <span class="badge">Giorno 4 di 5</span>
     <h1>Fogli di calcolo (Excel) 📊</h1>
@@ -30,6 +32,19 @@
       Oggi lavoriamo con celle, formule e grafici. Si parte con una "caccia all'errore": in ogni foglio mostrato
       qualcosa non torna — riuscite a scoprire cosa, prima dello scadere del tempo?
     </p>
+  </div>
+
+  <div class="card">
+    <span class="badge green">Scheda di approfondimento</span>
+    <h2>Fogli di calcolo: cose da ricordare</h2>
+    <ul class="lead" style="padding-left:20px; margin:0">
+      <li>Una formula inizia sempre con <span class="kbd">=</span> e può combinare numeri, riferimenti a celle (es. <span class="kbd">B3</span>) e funzioni come <span class="kbd">=SOMMA(...)</span>.</li>
+      <li>Controlla sempre l'<strong>intervallo</strong> di una formula (es. <span class="kbd">B1:B3</span>): un intervallo troppo corto o sbagliato è la causa più comune di un totale "che non torna".</li>
+      <li>Se sommando dei numeri ottieni <strong>0</strong>, controlla che le celle contengano davvero numeri e non testo (anche un'unità di misura scritta a mano può "rompere" il calcolo).</li>
+      <li><strong>Riferimento relativo</strong> (es. <span class="kbd">B2</span>) si adatta quando copi la formula altrove; <strong>riferimento assoluto</strong> (es. <span class="kbd">$B$2</span>) resta fisso.</li>
+      <li>Funzioni utilissime da ricordare: <span class="kbd">SOMMA</span>, <span class="kbd">MEDIA</span>, <span class="kbd">MAX</span>/<span class="kbd">MIN</span>, <span class="kbd">SE</span>, <span class="kbd">CONTA.SE</span>.</li>
+      <li>Un <strong>grafico</strong> ben scelto (barre per confronti, linee per andamenti nel tempo, torta per proporzioni) comunica i numeri molto più in fretta di una tabella.</li>
+    </ul>
   </div>
 
   <!-- ATTIVITÀ 1: QUIZ CACCIA ALL'ERRORE -->
@@ -40,15 +55,27 @@
         <h2 style="margin:0">Cosa non torna in questo foglio di calcolo?</h2>
       </div>
     </div>
-    <p class="lead">Osserva la formula e il risultato mostrato, poi individua il problema.</p>
+    <p class="lead">7 situazioni a tempo: osserva la formula e il risultato mostrato, poi individua il problema.</p>
     <div id="quiz-excel"></div>
   </div>
 
-  <!-- ATTIVITÀ 2: ABBINAMENTO FORMULE -->
+  <!-- ATTIVITÀ 2: ABBINAMENTO STRUMENTI EXCEL -->
   <div class="activity">
     <div class="activity-head">
       <div>
         <span class="badge green">Attività 2 · Abbinamento</span>
+        <h2 style="margin:0">Funzioni e strumenti di Excel: a cosa servono?</h2>
+      </div>
+    </div>
+    <p class="lead">Abbina ogni funzione o strumento alla situazione in cui torna utile.</p>
+    <div id="match-strumenti-excel"></div>
+  </div>
+
+  <!-- ATTIVITÀ 3: ABBINAMENTO FORMULE -->
+  <div class="activity">
+    <div class="activity-head">
+      <div>
+        <span class="badge green">Attività 3 · Abbinamento</span>
         <h2 style="margin:0">Formule di Excel: cosa calcolano?</h2>
       </div>
     </div>
@@ -64,14 +91,16 @@
 </div>
 
 <script src="shared/score.js"></script>
+<script src="shared/cloud-score.js"></script>
 <script src="shared/matching-engine.js"></script>
 <script src="shared/quiz-engine.js"></script>
 <script>
   document.getElementById('total-score').textContent = EipassScore.totals().score;
+  CloudScore.mountNameBar(document.getElementById('name-bar'));
 
   QuizEngine.mount(document.getElementById('quiz-excel'), {
     storageKey: 'g4-quiz-excel',
-    timePerQuestion: 30,
+    timePerQuestion: 55,
     questions: [
       {
         scenario: `<div class="scenario">
@@ -154,7 +183,63 @@
         correct: 0,
         explanation: 'La somma di celle che contengono testo restituisce 0 (il testo viene ignorato). La formula corretta sarebbe =SOMMA(B1:B3), riferita alla colonna con i valori numerici.'
       },
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">📊 Magazzino.xlsx — Foglio1</div>
+          <div class="scenario-body"><table>
+            <tr><th></th><th>A</th><th>B</th><th>C</th></tr>
+            <tr><td>1</td><td>Articolo</td><td>Quantità</td><td>Sotto scorta?</td></tr>
+            <tr><td>2</td><td>Viti</td><td>120</td><td>=SE(B2&lt;50; "Sì"; "No") → No</td></tr>
+            <tr><td>3</td><td>Bulloni</td><td>30</td><td><strong>=SE(B3&lt;50; "Sì"; "No") → No</strong></td></tr>
+          </table></div></div>`,
+        question: 'Per i Bulloni la quantità è 30 (sotto la soglia di 50), ma la formula mostra "No". Cosa è probabilmente sbagliato?',
+        options: [
+          'La condizione è scritta al contrario: con 30 < 50 il risultato dovrebbe essere "Sì". Probabilmente la formula corretta userebbe il simbolo ">" oppure i due risultati andrebbero invertiti',
+          'La cella C3 dovrebbe contenere un numero, non una formula',
+          'Il problema è che "Bulloni" è scritto con la maiuscola',
+          'Non c\'è nessun errore: il risultato è corretto'
+        ],
+        correct: 0,
+        explanation: 'Con =SE(B3<50; "Sì"; "No") e B3 = 30, la condizione "30 < 50" è vera: il risultato corretto sarebbe "Sì". Se compare "No" la formula è probabilmente scritta con la condizione invertita (es. =SE(B3>50;...) oppure con "Sì" e "No" scambiati).'
+      },
+      {
+        scenario: `<div class="scenario">
+          <div class="scenario-bar">📊 Iscrizioni_corso.xlsx — Foglio1</div>
+          <div class="scenario-body"><table>
+            <tr><th></th><th>A</th><th>B</th></tr>
+            <tr><td>1</td><td>Nome</td><td>Età</td></tr>
+            <tr><td>2</td><td>Luca</td><td>34</td></tr>
+            <tr><td>3</td><td>Sara</td><td>"29"</td></tr>
+            <tr><td>4</td><td>Marco</td><td>41</td></tr>
+            <tr><td>5</td><td><strong>Età media</strong></td><td><strong>=MEDIA(B2:B4) → 37,5</strong></td></tr>
+          </table></div></div>`,
+        question: "L'età di Sara (29) è scritta tra virgolette ed è allineata a sinistra nella cella, segno che Excel la tratta come testo. La media mostrata (37,5) corrisponde solo a Luca e Marco. Cosa sta succedendo?",
+        options: [
+          '=MEDIA() ignora le celle con testo: il valore di Sara non viene incluso nel calcolo, alterando il risultato finale',
+          'Excel arrotonda sempre le età per difetto',
+          'La formula =MEDIA() può calcolare al massimo due valori alla volta',
+          'Il risultato è corretto: 37,5 è la media di tutte e tre le età'
+        ],
+        correct: 0,
+        explanation: 'Numeri scritti come testo (spesso riconoscibili dall\'allineamento a sinistra o dalle virgolette) vengono ignorati da funzioni come =MEDIA() o =SOMMA(): conviene convertirli in numeri veri prima di calcolare.'
+      },
     ],
+  });
+
+  MatchingEngine.mount(document.getElementById('match-strumenti-excel'), {
+    storageKey: 'g4-match-strumenti',
+    leftTitle: 'Funzione / strumento',
+    rightTitle: 'Quando torna utile',
+    pairs: [
+      { left: 'Grafico a barre/colonne', right: 'Per confrontare valori tra diverse categorie (es. vendite per mese)' },
+      { left: 'Grafico a linee', right: "Per mostrare l'andamento di un valore nel tempo" },
+      { left: 'Grafico a torta', right: 'Per mostrare come un totale si suddivide in parti percentuali' },
+      { left: 'Filtro', right: 'Per visualizzare solo le righe che soddisfano una condizione scelta' },
+      { left: 'Ordinamento', right: 'Per disporre le righe in ordine crescente o decrescente secondo una colonna' },
+      { left: 'Formattazione condizionale', right: "Per cambiare automaticamente l'aspetto delle celle in base al loro valore (es. evidenziare i ritardi in rosso)" },
+      { left: 'Intestazioni di colonna (riga 1)', right: 'Titoli che identificano chiaramente il contenuto di ogni colonna' },
+      { left: 'Convalida dati', right: 'Per limitare i valori che si possono inserire in una cella (es. solo numeri da 1 a 10)' },
+    ]
   });
 
   MatchingEngine.mount(document.getElementById('match-formule'), {
